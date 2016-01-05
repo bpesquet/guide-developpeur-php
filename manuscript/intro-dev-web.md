@@ -2,7 +2,7 @@
 
 L'objectif de ce chapitre est de découvrir les notions fondamentales liées au développement Web.
 
-A> Ce chapitre s'inspire de la [documentation du framework Symfony](http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html).
+I> Ce chapitre s'inspire de la [documentation du framework Symfony](http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html).
 
 ## Le fonctionnement du Web
 
@@ -14,10 +14,7 @@ Pour être accessible, un site Web doit être publié sur un **serveur**.
 
 {icon=heart}
 G> ## Serveur
-G>
 G> Type particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
-
-I> Un **serveur** est un type particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
 
 Il existe de nombreux types de serveurs, en fonction du service rendu : serveur de fichiers, de messagerie, d'authentification... Un serveur qui permet de publier des sites Web est appelé serveur Web. Une même machine peut rendre différents services (exemple : serveur Web et serveur de fichiers).
 
@@ -33,8 +30,7 @@ D'autres types de logiciels que les navigateurs peuvent jouer le rôle de client
 
 La compréhension des échanges ayant lieu entre un client et un serveur Web lors de la consultation d'un site est essentielle. Il s'agit d'un mécanisme de type **requête/réponse**.
 
-![](../assets/intro-dev-web/web_http_echange.png)
-{:.centered}
+![](images/intro-dev-web/web_http_echange.png)
 
 1. L'échange est initié par le client, qui envoie au serveur une requête pour consulter une ressource Web.
 2. Le serveur prépare la page HTML associée.
@@ -52,8 +48,7 @@ HTTP est fondamentalement un protocole très simple, basé sur des commandes tex
 
 Prenons comme exemple la première étape de l'échange décrit plus haut.
 
-![](../assets/intro-dev-web/web_http_requete.png)
-{:.centered}
+![](images/intro-dev-web/web_http_requete.png)
 
 La requête HTTP envoyée par le navigateur prend une forme similaire à celle-ci :
 
@@ -76,8 +71,7 @@ Les méthodes HTTP les plus fréquemment utilisées sont `GET` (pour récupérer
 
 Lorsqu'il reçoit une requête HTTP, le serveur Web y puise les informations nécessaires pour construire la réponse, puis la renvoie au client. Continuons avec notre exemple précédent.
 
-![](../assets/intro-dev-web/web_http_echange.png)
-{:.centered}
+![](images/intro-dev-web/web_http_echange.png)
 
 La réponse HTTP renvoyée du serveur au client prend l'aspect ci-dessous.
 
@@ -101,18 +95,17 @@ Les codes de retour HTTP peuvent être classés par familles en fonction du prem
 
 Famille | Signification | Exemples
 --------|---------------|---------
-**1xx** | Information
-**2xx** | Succès | 200 : requête traitée avec succès
-**3xx** | Redirection
+**1xx** | Information   |
+**2xx** | Succès        | 200 : requête traitée avec succès
+**3xx** | Redirection   |
 **4xx** | Erreur provenant du client | 400 : syntaxe de la requête erronée<br>404 : ressource demandée non trouvée
-**5xx** | Erreur provenant du serveur| 500 : erreur interne du serveur<br>503 : service temporairement indisponible
+**5xx** | Erreur provenant du serveur | 500 : erreur interne du serveur<br>503 : service temporairement indisponible
 
-![](../assets/intro-dev-web/http_error_404.jpg)
-{:.centered}
+![](images/intro-dev-web/http_error_404.jpg)
 
 Vous trouverez sur [Wikipedia](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol) plus de détails sur le protocole HTTP.
 
-### La notion d'adresse Web
+### La notion d'URL
 
 On a l'habitude d'accéder à un site Web en utilisant son adresse. Celle-ci est de la forme :
 http://www.monsite.fr/mondossier/mapage.html. On peut décomposer cette adresse en plusieurs sous-parties.
@@ -125,7 +118,7 @@ La majorité des serveurs Web est configurée pour renvoyer une page par défaut
 
 Une adresse Web telle que celle ci-dessus esr ce qu'on appelle une **URL** ou *Uniform Resource Locator*. Elle permet de décrire l'emplacement d'une ressource Web et le moyen d'y accéder.
 
-## Sites statiques et sites dynamiques
+## La place du langage PHP
 
 Les évolutions technologiques récentes ont rendu la frontière entre sites statiques et dynamiques de plus en plus floue. Ce paragraphe présente ces deux concepts de manière générale.
 
@@ -140,7 +133,7 @@ La consultation d'un site Web statique met en jeu deux logiciels :
 
 Lorsqu'un client envoie une requête au serveur Web hébergeant un site statique, le serveur se contente de la renvoyer la ressource demandée. Les pages HTML affichées ne peuvent pas évoluer automatiquement, d'où le terme "statique".
 
-![](../assets/intro-dev-web/web_site_statique.png)
+![](images/intro-dev-web/web_site_statique.png)
 {:.centered}
 
 L'accès à un site Web statique est un exemple d'architecture **client/serveur**, appelée également architecture **deux tiers**.
@@ -163,12 +156,12 @@ A l'inverse d'un site statique, un site dynamique est un type de site Web dans l
 
 Lorsqu'un client envoie une requête au serveur Web hébergeant un site dynamique, le serveur prépare la page HTML correspondant à cette requête, puis la renvoie au client pour affichage. Les pages Web affichées au visiteur ne sont pas codées "en dur" comme dans le cas d'un site statique, mais **générées** au moment de leur consultation.
 
-![](../assets/intro-dev-web/web_site_dynamique.png)
+![](images/intro-dev-web/web_site_dynamique.png)
 {:.centered}
 
 Les pages HTML obtenues peuvent être personnalisées en fonction du visiteur et/ou de données externes au site. Un cas très fréquent est celui où les pages Web renvoyées incluent des informations stockées dans une base de données. On obtient alors un exemple d'architecture **trois tiers**.
 
-![](../assets/intro-dev-web/web_3tiers.jpg)
+![](images/intro-dev-web/web_3tiers.jpg)
 {:.centered}
 
 **ATTENTION** : il est très important de comprendre que le résultat renvoyé par le serveur Web et affiché par le client est toujours une page HTML.
@@ -181,12 +174,12 @@ Un site Web dynamique se compose de pages HTML, de fichiers CSS et d'autres ress
 
 Lorsqu'on souhaite créer soi-même un site Web dynamique, on doit commencer par choisir le langage utilisé pour la génération des pages HTML. Le diagramme ci-dessous rassemble les principaux acteurs de ce marché.
 
-![](../assets/intro-dev-web/web_server_languages_chart.jpg)
+![](images/intro-dev-web/web_server_languages_chart.jpg)
 {:.centered}
 
 On constate que la technologie la plus populaire est PHP, suivie de loin par ASP.NET (Microsoft) et Java (ORACLE). PHP est particulièrement dominant dans le secteur des CMS (*Content Management System*) qui permettent de publier du contenu en ligne sans presque aucune connaissance technique. On peut citer comme exemples Wordpress, Drupal ou Joomla.
 
 Quelle que soit la technologie mise en oeuvre, il est essentiel de bien comprendre que ces langages sont toujours employés côté serveur et jamais côté client (d'où le terme de langages "serveur") Un navigateur Web ne sait pas exploiter directement une page PHP ou ASP.NET. En revanche, il sait afficher une page HTML qu'un serveur Web aura préalablement générée en utilisant PHP ou ASP.NET.
 
-![](../assets/intro-dev-web/web_php_htmlcss.png)
+![](images/intro-dev-web/web_php_htmlcss.png)
 {:.centered}
