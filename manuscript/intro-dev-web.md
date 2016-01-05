@@ -2,7 +2,7 @@
 
 L'objectif de ce chapitre est de découvrir les notions fondamentales liées au développement Web.
 
-**Remarque** : ce cours s'inspire pour partie de la [documentation du framework Symfony2](http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html).
+A> Ce chapitre s'inspire de la [documentation du framework Symfony](http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html).
 
 ## Le fonctionnement du Web
 
@@ -12,20 +12,22 @@ Pour consulter un site Web sur Internet, il suffit de taper l'adresse correcte d
 
 Pour être accessible, un site Web doit être publié sur un **serveur**. 
 
-Serveur
+{icon=heart}
+G> ## Serveur
+G>
+G> Type particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
 
-: Type particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
+I> Un **serveur** est un type particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
 
-Il existe de nombreux types de serveurs, en fonction du service rendu : serveur de fichiers, de messagerie, d'authentification... Un serveur qui permet de publier des sites Web est appelé serveur Web.
-
-**Remarque** : une même machine peut rendre différents services (exemple : serveur Web et serveur de fichiers).
+Il existe de nombreux types de serveurs, en fonction du service rendu : serveur de fichiers, de messagerie, d'authentification... Un serveur qui permet de publier des sites Web est appelé serveur Web. Une même machine peut rendre différents services (exemple : serveur Web et serveur de fichiers).
 
 Plus précisément, une machine serveur Web embarque et exécute un logiciel serveur, capable de répondre aux demandes de consultations de sites Web. Les logiciels serveurs Web les plus populaires sont [Apache](http://httpd.apache.org/), [Microsoft IIS](http://www.iis.net/) et [nginx](http://nginx.org/).
 
 ### La notion de client Web
+
 La machine qui permet la consultation du site Web demandé est appelé **client Web**. Il s'agit d'un abus de langage : en réalité, le véritable client est un logiciel qui s'exécute sur cette machine et réalise l'opération de consultation. Ce logiciel est le plus souvent un navigateur Web (*browser*). Les navigateurs Web les plus populaires sont [Internet Explorer](http://windows.microsoft.com/fr-fr/internet-explorer/), [Mozilla Firefox](https://www.mozilla.org/fr/firefox), [Chrome](https://www.google.fr/chrome/browser/), [Safari](https://www.apple.com/fr/safari/) et [Opera](http://www.opera.com/fr).
 
-**Remarque** : d'autres types de logiciels que les navigateurs peuvent jouer le rôle de clients Web en se connectant à des serveurs Web. Exemples : robots d'indexation, aspirateurs Web, applications mobiles, etc.
+D'autres types de logiciels que les navigateurs peuvent jouer le rôle de clients Web en se connectant à des serveurs Web. Exemples : robots d'indexation, aspirateurs Web, applications mobiles, etc.
 
 ### La communication entre client et serveur
 
