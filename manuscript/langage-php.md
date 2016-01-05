@@ -1,3 +1,7 @@
--# Le langage PHP
+# Découverte du langage PHP
 
-TODO
+## Les bases du langage
+
+## Transmettre des données entre les pages
+
+## Stocker des informations dans une base de données

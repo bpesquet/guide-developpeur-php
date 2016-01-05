@@ -1,5 +1,4 @@
 intro-dev-web.md
 langage-php.md
-bases-langage.md
-transmettre-infos.md
+poo-php.md
 php-framework.md
