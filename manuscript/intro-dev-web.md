@@ -95,11 +95,15 @@ Les codes de retour HTTP peuvent être classés par familles en fonction du prem
 
 |Famille | Signification | Exemples|
 |--------|---------------|---------|
-|**1xx** | Information   ||
-|**2xx** | Succès        | 200 : requête traitée avec succès|
-|**3xx** | Redirection   ||
-|**4xx** | Erreur provenant du client | 400 : syntaxe de la requête erronée<br>404 : ressource demandée non trouvée|
-|**5xx** | Erreur provenant du serveur | 500 : erreur interne du serveur<br>503 : service temporairement indisponible|
+|**1xx**| Information ||
+|**2xx**| Succès        | 200 : requête traitée avec succès|
+|**3xx**| Redirection   ||
+|--------|---------------|---------|
+|**4xx**| Erreur provenant du client | 400 : syntaxe de la requête erronée|
+|       |                            | 404 : ressource demandée non trouvée|
+|--------|---------------|---------|
+|**5xx**| Erreur provenant du serveur | 500 : erreur interne du serveur
+503 : service temporairement indisponible|
 
 ![](images/intro-dev-web/http_error_404.jpg)
 
