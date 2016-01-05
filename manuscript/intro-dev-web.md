@@ -2,7 +2,7 @@
 
 L'objectif de ce chapitre est de découvrir les notions fondamentales liées au développement Web.
 
-I> Ce chapitre s'inspire de la [documentation du framework Symfony](http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html).
+I> Ce chapitre s'inspire de la [documentation du framework PHP Symfony](http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html).
 
 ## Le fonctionnement du Web
 
@@ -10,13 +10,13 @@ Pour consulter un site Web sur Internet, il suffit de taper l'adresse correcte d
 
 ### La notion de serveur Web
 
-Pour être accessible, un site Web doit être publié sur un **serveur**. 
+Pour être accessible, un site Web doit être publié sur un serveur. 
 
-{icon=heart}
-G> ## Serveur
-G> Type particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
+Un **serveur** est un ype particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
 
-Il existe de nombreux types de serveurs, en fonction du service rendu : serveur de fichiers, de messagerie, d'authentification... Un serveur qui permet de publier des sites Web est appelé serveur Web. Une même machine peut rendre différents services (exemple : serveur Web et serveur de fichiers).
+Il existe de nombreux types de serveurs, en fonction du service rendu : serveur de fichiers, de messagerie, d'authentification... Un serveur qui permet de publier des sites Web est appelé serveur Web. 
+
+I> Une même machine peut rendre différents services (exemple : serveur Web et serveur de fichiers).
 
 Plus précisément, une machine serveur Web embarque et exécute un logiciel serveur, capable de répondre aux demandes de consultations de sites Web. Les logiciels serveurs Web les plus populaires sont [Apache](http://httpd.apache.org/), [Microsoft IIS](http://www.iis.net/) et [nginx](http://nginx.org/).
 
@@ -93,13 +93,13 @@ Enfin, la réponse HTTP contient éventuellement la ressource demandée par le c
 
 Les codes de retour HTTP peuvent être classés par familles en fonction du premier chiffre.
 
-Famille | Signification | Exemples
---------|---------------|---------
-**1xx** | Information   |
-**2xx** | Succès        | 200 : requête traitée avec succès
-**3xx** | Redirection   |
-**4xx** | Erreur provenant du client | 400 : syntaxe de la requête erronée<br>404 : ressource demandée non trouvée
-**5xx** | Erreur provenant du serveur | 500 : erreur interne du serveur<br>503 : service temporairement indisponible
+|Famille | Signification | Exemples|
+|--------|---------------|---------|
+|**1xx** | Information   ||
+|**2xx** | Succès        | 200 : requête traitée avec succès|
+|**3xx** | Redirection   ||
+|**4xx** | Erreur provenant du client | 400 : syntaxe de la requête erronée<br>404 : ressource demandée non trouvée|
+|**5xx** | Erreur provenant du serveur | 500 : erreur interne du serveur<br>503 : service temporairement indisponible|
 
 ![](images/intro-dev-web/http_error_404.jpg)
 
