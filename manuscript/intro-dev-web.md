@@ -132,17 +132,11 @@ Lorsqu'un client envoie une requête au serveur Web hébergeant un site statique
 
 L'accès à un site Web statique est un exemple d'architecture **client/serveur**, 
 
-La mise à jour d'un site Web statique nécessite l'édition des fichiers sources, puis la mise en ligne des modifications (publication sur le serveur Web). Ce processus a plusieurs inconvénients :
-
-* Il nécessite des connaissances techniques : langages HTML et/ou CSS, méthode de publication d'un site, etc.
-* Il devient vite contraignant dans le cas d'un site qui change fréquemment.
-* Il est inadapté aux sites dont le contenu est enrichi par ses utilisateurs ("Web 2.0").
-
-Pour toutes les raisons précédentes, on emploie un site statique lorsque le seul besoin est de présenter des informations au visiteur, sans aucune interactivité. On parle également de site vitrine.
+La mise à jour d'un site Web statique nécessite l'édition des fichiers sources, puis la mise en ligne des modifications (publication sur le serveur Web).
 
 ### L'évolution vers des sites dynamiques
 
-L'explosion de la popularité du Web au début des années 2000 a conduit à de nouveaux besoins et usages et provoqué l'apparition des sites Web dynamiques. A l'inverse d'un site statique, un site dynamique est un type de site Web dans lequel le contenu des pages est construit au moment de la requête du client. 
+L'explosion de la popularité du Web au début des années 2000 a provoqué l'appatition de nouveaux besoins et conduit à l'émergence des sites Web dynamiques. A l'inverse d'un site statique, un site dynamique est un type de site Web dans lequel le contenu des pages est construit au moment de la requête du client. 
 
 Lorsqu'un client envoie une requête au serveur Web hébergeant un site dynamique, le serveur prépare la page HTML correspondant à cette requête, puis la renvoie au client pour affichage. Les pages Web affichées au visiteur ne sont pas figées comme dans le cas d'un site statique, mais **générées** au moment de leur consultation.
 
@@ -152,16 +146,14 @@ Lorsqu'un client envoie une requête au serveur Web hébergeant un site dynamiqu
 
 Contrairement à un site statique, un site dynamique ouvre la voie à des interactions quasiment illimitées avec ses visiteurs : identification, échange de données entre site et utilisateur, mise à jour du site par ses utilisateurs ("Web 2.0")... Parmi les nombreux exemples de sites Web dynamiques, on peut citer les sites de e-commerce, CMS, wikis, forums...
 
-Un site Web dynamique se compose de pages HTML, de fichiers CSS et d'autres ressources comme des images, mais pas seulement. Il emploie nécessairement un langage capable de générer des pages HTML.
+### Les langages serveur du Web dynamique
 
-### PHP et les autres langages serveur
-
-Lorsqu'on souhaite créer soi-même un site Web dynamique, on doit commencer par choisir le langage utilisé pour la génération des pages HTML. Le diagramme ci-dessous rassemble les principaux acteurs de ce marché.
+Pour créer un site Web dynamique. il faut obligatoireement utiliser un langage capable de *générer* des pages HTML. Le diagramme ci-dessous rassemble les principaux langages capables de réaliser cette tâche.
 
 ![](images/intro-dev-web/web_server_languages_chart.jpg)
 
 On constate que la technologie la plus populaire est PHP, suivie de loin par ASP.NET (Microsoft) et Java (ORACLE). PHP est particulièrement dominant dans le secteur des CMS (*Content Management System*) qui permettent de publier du contenu en ligne sans presque aucune connaissance technique. On peut citer comme exemples Wordpress, Drupal ou Joomla.
 
-Quelle que soit la technologie mise en oeuvre, il est essentiel de bien comprendre que ces langages sont toujours employés côté serveur et jamais côté client (d'où le terme de langages "serveur") Un navigateur Web ne sait pas exploiter directement une page PHP ou ASP.NET. En revanche, il sait afficher une page HTML qu'un serveur Web aura préalablement générée en utilisant PHP ou ASP.NET.
+Quelle que soit la technologie mise en oeuvre, il est essentiel de bien comprendre que ces langages sont toujours employés côté serveur Web et jamais côté client (d'où le terme de langages "serveur") Un navigateur Web ne sait pas exploiter directement une page PHP ou ASP.NET. En revanche, il sait afficher une page HTML qu'un serveur Web aura préalablement générée en utilisant PHP ou ASP.NET.
 
 ![](images/intro-dev-web/web_php_htmlcss.png)
