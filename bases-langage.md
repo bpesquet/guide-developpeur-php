@@ -45,19 +45,6 @@ On peut inclure des balises HTML dans le texte affiché par `echo`, ou bien incl
 
 **Conseil** : sauf cas particulier, on utilisera plutôt la seconde technique, qui préserve la structure HTML de la page. 
 
-## Chaînes de caractères
-
-Les chaînes de caractères PHP sont délimitées par des guillemets doubles `"..."` ou par des guillemets simples `'...'`. La différence entre les deux syntaxes apparaît lorsque la chaîne contient des variables (voir plus loin).
-
-Il est possible de concaténer (assembler) plusieurs chaînes de caractères au moyen du symbole `.`.
-
-```php
-<?php echo "Bonjour" . " " . "Monde !"; ?>
-<?php echo 'Bonjour' . ' ' . 'Monde !'; ?>
-```
-
-Chaque ligne ci-dessus affiche le texte `Bonjour Monde !`.
-
 ## Commentaires
 
 A l'intérieur d'un bloc de code PHP, on peut ajouter des commentaires avec les symboles communs à de nombreux langages de programmation : `//` pour un commentaire sur une seule ligne et `/* ... */` pour un commentaire sur plusieurs lignes. 
@@ -71,45 +58,12 @@ A l'extérieur d'un bloc PHP, on utilise la syntaxe HTML `<!-- ... -->` pour ajo
 // un commentaire PHP ?>
 ```
 
-## Variables
-
-Une variable joue en PHP le même rôle que dans tout autre langage : stocker une information. Une variable PHP est définie par un nom qui commence obligatoirement par le symbole `$`.
-
-```php
-<?php $message = "Bonjour Monde !";
-echo $message; ?>
-```
-
-On remarque au passage que la variable `$message` n'a pas un type explicite comme `string` ou `int`. PHP n'impose pas au programmeur de définir les types des variables. On parle de **typage dynamique**.
-
-Après sa définition, une variable PHP est utilisable à n'importe quel endroit de la page, même dans un autre bloc de code.
-
-```php
-<?php $message = "Bonjour Monde !"; ?>
-<h1>Un titre</h1>
-<h2>Un sous-titre</h2>
-<p><?php echo $message; ?></p>
-```
-
-La différence entre guillemets simples et doubles apparaît lorsqu'on inclut une variable dans une chaîne de caractères. 
-
-```php
-<?php $age = "39"; ?>
-<p><?php echo "Vous avez $age ans"; ?></p>
-<p><?php echo 'Vous avez $age ans'; ?></p>
-```
-
-Le premier `echo` affiche : `Vous avez 39 ans`.
-Le second `echo` affiche : `Vous avez $age ans`.
-
-Lorsqu'on utilise des guillemets doubles pour définir une chaîne de caractères, les variables sont interprétées (remplacées par leur valeur). Ce n'est pas le cas avec des guillemets simples.
-
 ## Inclure des portions de page
 
 Un fichier PHP peut inclure le contenu d'un autre fichier grâce à l'instruction `include`.
 
 ```php
-<?php include 'monfichier.php`?>
+<?php include("monfichier.php"); ?>
 ```
 
 Au moment de l'exécution, cette instruction sera remplacée par le contenu du fichier inclus. 
@@ -124,12 +78,12 @@ Cette technique permet de centraliser le code des éléments communs à plusieur
         <title>Une page PHP modulaire</title>
     </head>
     <body>
-        <?php include 'header.php'; ?>
-        <?php include 'menu.php'; ?>
+        <?php include("header.php"); ?>
+        <?php include("menu.php"); ?>
         
         <!-- ... (contenu spécifique) -->
         
-        <?php include 'footer.php'; ?>
+        <?php include("footer.php"); ?>
     </body>
 </html>
 ```
