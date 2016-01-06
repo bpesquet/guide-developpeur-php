@@ -47,6 +47,8 @@ On peut inclure des balises HTML dans le texte affiché par `echo`, ou bien incl
 
 **Conseil** : sauf cas particulier, on utilisera plutôt la seconde technique, qui préserve la structure HTML de la page. 
 
+TODO Ajout <?= ... ?>
+
 ## Commentaires
 
 A l'intérieur d'un bloc de code PHP, on peut ajouter des commentaires avec les symboles communs à de nombreux langages de programmation : `//` pour un commentaire sur une seule ligne et `/* ... */` pour un commentaire sur plusieurs lignes. 
@@ -89,3 +91,5 @@ Cette technique permet de centraliser le code des éléments communs à plusieur
     </body>
 </html>
 ```
+
+TODO Ajout require et *_once
