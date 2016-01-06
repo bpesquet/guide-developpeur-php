@@ -159,5 +159,3 @@ On constate que la technologie la plus populaire est PHP, suivie de loin par ASP
 Quelle que soit la technologie mise en oeuvre, il est essentiel de bien comprendre que ces langages sont toujours employés côté serveur Web et jamais côté client (d'où le terme de langages "serveur"). 
 
 Un navigateur Web ne sait pas exploiter directement une page PHP ou ASP.NET. En revanche, il sait afficher une page HTML qu'un serveur Web aura préalablement générée en utilisant PHP ou ASP.NET.
-
-![](images/intro-dev-web/web_php_htmlcss.png)
