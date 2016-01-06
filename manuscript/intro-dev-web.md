@@ -10,9 +10,7 @@ Pour consulter un site Web sur Internet, il suffit de taper l'adresse correcte d
 
 ### La notion de serveur Web
 
-Pour être accessible, un site Web doit être publié sur un serveur. 
-
-Un **serveur** est un ype particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
+Pour être accessible, un site Web doit être publié sur un **serveur**. Un serveur est un type particulier d'ordinateur dont le rôle est d'attendre les demandes de clients, et d'y répondre. Un serveur rend un service à ses clients.
 
 Il existe de nombreux types de serveurs, en fonction du service rendu : serveur de fichiers, de messagerie, d'authentification... Un serveur qui permet de publier des sites Web est appelé serveur Web. 
 
@@ -109,8 +107,7 @@ Vous trouverez sur [Wikipedia](http://fr.wikipedia.org/wiki/Hypertext_Transfer_P
 
 ### La notion d'URL
 
-On a l'habitude d'accéder à un site Web en utilisant son adresse. Celle-ci est de la forme :
-http://www.monsite.fr/mondossier/mapage.html. On peut décomposer cette adresse en plusieurs sous-parties.
+On a l'habitude d'accéder à un site Web en utilisant son adresse. Celle-ci est de la forme : `http://www.monsite.fr/mondossier/mapage.html`. On peut décomposer cette adresse en plusieurs sous-parties.
 
 * `http://` signifie qu'on utilise le protocole HTTP.
 * `www.monsite.fr` est le nom de domaine du site Web visité.
