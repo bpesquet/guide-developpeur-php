@@ -4,6 +4,7 @@
 * [Développement Web avec PHP](dev-web-php.md)
     * [Les bases du langage](bases-langage.md)
     * [Programmer avec PHP](programmer-php.md)
+    * [Transmettre des données entre pages](transmettre-donnees.md)
 
 
 
