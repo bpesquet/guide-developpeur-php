@@ -117,11 +117,9 @@ Une adresse Web telle que celle ci-dessus esr ce qu'on appelle une **URL** ou *U
 
 ## La place du langage PHP
 
-Les évolutions technologiques récentes ont rendu la frontière entre sites statiques et dynamiques de plus en plus floue. Ce paragraphe présente ces deux concepts de manière générale.
+### Au commencement du Web : les sites statiques
 
-### Anatomie d'un site Web statique
-
-Un site Web statique se compose essentiellement de fichiers sources **HTML** (pour le contenu des pages) et **CSS** (pour la mise en forme). Il peut également intégrer d'autres types de ressources comme par exemple des images.
+Les tous premiers sites Web créés dans les années 1990 étaient composés uniquement de pages HTML (pour le contenu) et de fichiers CSS (pour la mise en forme du contenu), et éventuellement d'autres types de ressources comme par exemple des images.
 
 La consultation d'un site Web statique met en jeu deux logiciels :
 
@@ -131,13 +129,8 @@ La consultation d'un site Web statique met en jeu deux logiciels :
 Lorsqu'un client envoie une requête au serveur Web hébergeant un site statique, le serveur se contente de la renvoyer la ressource demandée. Les pages HTML affichées ne peuvent pas évoluer automatiquement, d'où le terme "statique".
 
 ![](images/intro-dev-web/web_site_statique.png)
-{:.centered}
 
-L'accès à un site Web statique est un exemple d'architecture **client/serveur**, appelée également architecture **deux tiers**.
-
-Tier
-
-: Un "tier" correspond à un processus (programme en cours d'exécution) impliqué dans l'utilisation d'une application informatique.
+L'accès à un site Web statique est un exemple d'architecture **client/serveur**, 
 
 La mise à jour d'un site Web statique nécessite l'édition des fichiers sources, puis la mise en ligne des modifications (publication sur le serveur Web). Ce processus a plusieurs inconvénients :
 
@@ -147,36 +140,28 @@ La mise à jour d'un site Web statique nécessite l'édition des fichiers source
 
 Pour toutes les raisons précédentes, on emploie un site statique lorsque le seul besoin est de présenter des informations au visiteur, sans aucune interactivité. On parle également de site vitrine.
 
-### Anatomie d'un site Web dynamique
+### L'évolution vers des sites dynamiques
 
-A l'inverse d'un site statique, un site dynamique est un type de site Web dans lequel le contenu des pages peut évoluer automatiquement. 
+L'explosion de la popularité du Web au début des années 2000 a conduit à de nouveaux besoins et usages et provoqué l'apparition des sites Web dynamiques. A l'inverse d'un site statique, un site dynamique est un type de site Web dans lequel le contenu des pages est construit au moment de la requête du client. 
 
-Lorsqu'un client envoie une requête au serveur Web hébergeant un site dynamique, le serveur prépare la page HTML correspondant à cette requête, puis la renvoie au client pour affichage. Les pages Web affichées au visiteur ne sont pas codées "en dur" comme dans le cas d'un site statique, mais **générées** au moment de leur consultation.
+Lorsqu'un client envoie une requête au serveur Web hébergeant un site dynamique, le serveur prépare la page HTML correspondant à cette requête, puis la renvoie au client pour affichage. Les pages Web affichées au visiteur ne sont pas figées comme dans le cas d'un site statique, mais **générées** au moment de leur consultation.
 
 ![](images/intro-dev-web/web_site_dynamique.png)
-{:.centered}
 
-Les pages HTML obtenues peuvent être personnalisées en fonction du visiteur et/ou de données externes au site. Un cas très fréquent est celui où les pages Web renvoyées incluent des informations stockées dans une base de données. On obtient alors un exemple d'architecture **trois tiers**.
+**Important** : Le résultat renvoyé par le serveur Web et affiché par le client est **toujours** une page HTML.
 
-![](images/intro-dev-web/web_3tiers.jpg)
-{:.centered}
-
-**ATTENTION** : il est très important de comprendre que le résultat renvoyé par le serveur Web et affiché par le client est toujours une page HTML.
-
-Contrairement à un site statique, un site dynamique ouvre la voie à des interactions quasiment illimitées avec ses visiteurs : identification, échange de données entre site et utilisateur, mise à jour du site par ses utilisateurs... Plus besoin de mettre à jour manuellement le code source des pages du site : il suffit que les données nécessaires soient stockées et accessibles par le serveur Web pour construire la page HTML affichée. Voici quelques types de sites Web dynamiques : sites de e-commerce, CMS, wikis, forums...
+Contrairement à un site statique, un site dynamique ouvre la voie à des interactions quasiment illimitées avec ses visiteurs : identification, échange de données entre site et utilisateur, mise à jour du site par ses utilisateurs ("Web 2.0")... Parmi les nombreux exemples de sites Web dynamiques, on peut citer les sites de e-commerce, CMS, wikis, forums...
 
 Un site Web dynamique se compose de pages HTML, de fichiers CSS et d'autres ressources comme des images, mais pas seulement. Il emploie nécessairement un langage capable de générer des pages HTML.
 
-### Les langages serveur du Web dynamique
+### PHP et les autres langages serveur
 
 Lorsqu'on souhaite créer soi-même un site Web dynamique, on doit commencer par choisir le langage utilisé pour la génération des pages HTML. Le diagramme ci-dessous rassemble les principaux acteurs de ce marché.
 
 ![](images/intro-dev-web/web_server_languages_chart.jpg)
-{:.centered}
 
 On constate que la technologie la plus populaire est PHP, suivie de loin par ASP.NET (Microsoft) et Java (ORACLE). PHP est particulièrement dominant dans le secteur des CMS (*Content Management System*) qui permettent de publier du contenu en ligne sans presque aucune connaissance technique. On peut citer comme exemples Wordpress, Drupal ou Joomla.
 
 Quelle que soit la technologie mise en oeuvre, il est essentiel de bien comprendre que ces langages sont toujours employés côté serveur et jamais côté client (d'où le terme de langages "serveur") Un navigateur Web ne sait pas exploiter directement une page PHP ou ASP.NET. En revanche, il sait afficher une page HTML qu'un serveur Web aura préalablement générée en utilisant PHP ou ASP.NET.
 
 ![](images/intro-dev-web/web_php_htmlcss.png)
-{:.centered}
