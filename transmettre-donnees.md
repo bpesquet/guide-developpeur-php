@@ -67,6 +67,8 @@ $mdp = $_POST["password"];
 
 Les formulaires permettent également d'envoyer des fichiers. On retrouve les informations sur les fichiers envoyés dans un tableau associatif nommé `$_FILES`.
 
+TODO
+
 ## Transmission de données et sécurité
 
 Que ce soit pour des données issues de l'URL (`$_GET`) ou d'un formulaire (`$_POST`), il garder à l'esprit que les données reçues sont saisies par l'utilisateur, ce qui peut constituer une menace pour la sécurité du site. Par défaut, rien n'empêche un utilisateur malveillant de saisir des données de manière à provoquer un comportement inattendu du site Web. C'est ce que l'on appelle **l'injection de code**, ou faille XSS. Par exemple, au lieu de saisir son nom, l'utilisateur va saisir un morceau de code JavaScript qui s'exécutera à l'insu du développeur du site.
@@ -153,6 +155,6 @@ En fin de visite, la destruction explicite d'une session se fait grâce à la fo
 
 **Rappel** : cette destruction est automatique au bout d'un certain temps d'inactivité.
 
-### Utilité des sessions
+### Intérêt des sessions
 
 Un cas d'utilisation très fréquent des sessions est l'authentification d'un utilisateur par login/mot de passe. En utilisant une session pour mémoriser ces paramètres, on peut "reconnaître" l'utilisateur sur toutes les pages du site, mais aussi restreindre certaines zones aux utilisateurs authentifiés : si la variable de session associée au login existe, on affiche le contenu, sinon on affiche une erreur.
