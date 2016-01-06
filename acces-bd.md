@@ -81,7 +81,7 @@ Dans les deux cas, la variable $ligne s'utilise comme un tableau associatif. Ell
 
 ### Requêtes avec paramètres
 
-Lorsque la requête SQL à exécuter comporte des paramètres, il faut utiliser une requête paramétrée.
+Lorsque la requête SQL à exécuter comporte des paramètres, il faut utiliser une technique différente.
 
 ```php
 // ...
@@ -97,14 +97,12 @@ $codeService = $_POST['service'];
 $req->execute(array($codeService));
 ```
 
-Ce code source utilise ce qu'on appelle une requête préparée. Il s'agit d'une technique dans laquelle on définit d'abord une requête (appel de la méthode `prepare` sur l'objet `$bdd`) en prévoyant ses différents paramètres, indiqués par des `?` dans le code SQL. Ensuite, on exécute la requête préparée (méthode `execute` sur l'objet `$req`). Lors ce cet appel, on passe les paramètres nécessaires sous la forme d'un tableau.
+Ce code source utilise ce qu'on appelle une **requête préparée**. Il s'agit d'une technique dans laquelle on définit d'abord une requête (appel de la méthode `prepare` sur l'objet `$bdd`) en prévoyant ses différents paramètres, indiqués par des `?` dans le code SQL. Ensuite, on exécute la requête préparée (méthode `execute` sur l'objet `$req`). Lors ce cet appel, on passe les paramètres nécessaires sous la forme d'un tableau.
 
 **Avertissement** : le tableau des paramètres doit contenir autant d'élément qu'il y a de `?` dans la requête préparée. L'ordre doit également être respecté.
 
-**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']`` reçue du formulaire. L'exécution d'une requête préparée effectue ce travail automatiquement.
+**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']` reçue du formulaire. Cette opération est effectuée automatiquement par le SGBDR au moment de l'exécution de la requête.
 
 Outre le gain de temps lorsqu'une même requête est exécutée plusieurs fois avec des paramètres différents, l'utilisation d'une requête préparée évite d'inclure directement des données utilisateur dans une requête SQL. Ainsi, la base de données est protégée contre les attaques de type "injection SQL".
 
 ![](images/acces-bd/sql_injection.png)
-
-
