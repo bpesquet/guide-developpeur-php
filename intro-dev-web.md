@@ -146,7 +146,7 @@ Lorsqu'un client envoie une requête au serveur Web hébergeant un site dynamiqu
 
 **Important** : Le résultat renvoyé par le serveur Web et affiché par le client est **toujours** une page HTML.
 
-Contrairement à un site statique, un site dynamique ouvre la voie à des interactions quasiment illimitées avec ses visiteurs : identification, échange de données entre site et utilisateur, mise à jour du site par ses utilisateurs ("Web 2.0")... Parmi les nombreux exemples de sites Web dynamiques, on peut citer les sites de e-commerce, CMS, wikis, forums...
+Contrairement à un site statique, un site dynamique ouvre la voie à des interactions quasiment illimitées avec ses visiteurs : identification, échange de données entre site et utilisateur, mise à jour du site par ses utilisateurs ("Web 2.0")... Parmi les nombreux exemples de sites Web dynamiques, on peut citer les sites de e-commerce, CMS (*Content Management System* ou systèmes de gestion de contenu) , wikis, forums...
 
 ### Les langages serveur du Web dynamique
 
@@ -154,8 +154,13 @@ Pour créer un site Web dynamique. il faut obligatoireement utiliser un langage 
 
 ![](images/intro-dev-web/web_server_languages_chart.jpg)
 
-On constate que la technologie la plus populaire est PHP, suivie de loin par ASP.NET (Microsoft) et Java (ORACLE). PHP est particulièrement dominant dans le secteur des CMS (*Content Management System*) qui permettent de publier du contenu en ligne sans presque aucune connaissance technique. On peut citer comme exemples Wordpress, Drupal ou Joomla.
+On constate que la technologie la plus populaire est PHP, suivie de loin par ASP.NET (Microsoft) et Java (ORACLE). Les technologies ASP.NET et Java sont plus souvent employées pour des sites complexes avec d'importants besoins en matière de performances et de montée en charge. Ces sites sont assez peu nombreux, d'où la domination globale de PHP. 
+
+**Note** : cela ne veut pas dire que le langage PHP ne peut pas, lui aussi, être employé dans des contextes exigeants.
+
+PHP est particulièrement dominant dans le secteur des CMS, ces logiciels qui permettent de publier du contenu en ligne sans presque aucune connaissance technique. On peut citer comme exemples Wordpress, Drupal ou Joomla. Il est important de connaître au minimum les bases du langage afin de pouvoir utiliser sereinement ces outils. La position dominante de PHP s'explique également par la richesse de son écosystème : librairies, frameworks, etc. 
 
 Quelle que soit la technologie mise en oeuvre, il est essentiel de bien comprendre que ces langages sont toujours employés côté serveur Web et jamais côté client (d'où le terme de langages "serveur"). 
 
 Un navigateur Web ne sait pas exploiter directement une page PHP ou ASP.NET. En revanche, il sait afficher une page HTML qu'un serveur Web aura préalablement générée en utilisant PHP ou ASP.NET.
+
