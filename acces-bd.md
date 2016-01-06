@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Vous connaissez à présent les bases du langage PHP et vous savez transmettre des informations d'une page à une autre. Cependant, il nous reste à étudier le moyen d'accéder à des données externes sauvegardées de manière persistante. Ainsi, nous pourrons sauvegarder les informations saisies par les utilisateurs, ou bien construire des pages dynamique à partir des données externes.
+Vous connaissez à présent les bases du langage PHP et vous savez transmettre des informations d'une page à une autre. Cependant, il nous reste à étudier le moyen de stocker des données de manière persistante. Ainsi, nous pourrions mémoriser les informations saisies par les utilisateurs, ou bien construire des pages dynamiques à partir des données externes.
 
-**Définition** : une donnée est persistante lorsqu'elle survit à l'arrêt du logiciel ou de la machine qui la manipule. Le contraire de "persistante" est "volatile".
+**Définition** : une donnée est dite persistante lorsqu'elle survit à l'arrêt du logiciel ou de la machine qui la manipule. Le contraire de "persistante" est "volatile".
 
 Actuellement, la technique la plus utilisée pour rendre des données persistantes consiste à les sauvegarder dans un logiciel dédié appelé SGBDR ou Système de Gestion de Bases de Données Relationelles. Parmi les SGBDR les plus connus, citons MySQL, PostgreSQL ou encore ORACLE.
 
