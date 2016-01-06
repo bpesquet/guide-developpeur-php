@@ -47,7 +47,7 @@ L'affichage de texte s'effectue grâce à la commande `echo`.
 
 ```php
 <?php echo "Bonjour Monde !"; ?>
-````
+```
 
 On peut inclure des balises HTML dans le texte affiché par `echo`, ou bien inclure l'appel à `echo` dans des balises HTML. Ainsi, les deux appels suivants produisent exactement le même résultat.
 
@@ -67,7 +67,7 @@ Il est possible de concaténer (assembler) plusieurs chaînes de caractères au 
 ```php
 <?php echo "Bonjour" . " " . "Monde !"; ?>
 <?php echo 'Bonjour' . ' ' . 'Monde !'; ?>
-````
+```
 
 Chaque ligne ci-dessus affiche le texte `Bonjour Monde !`.
 
@@ -78,7 +78,7 @@ Une variable joue en PHP le même rôle que dans tout autre langage : stocker un
 ```php
 <?php $message = "Bonjour Monde !";
 echo $message; ?>
-````
+```
 
 On remarque au passage que la variable `$message` n'a pas de type explicite comme `string` ou `int`. PHP n'impose pas au programmeur de définir les types des variables. On parle de **typage dynamique**.
 
@@ -89,7 +89,7 @@ Après sa définition, une variable PHP est utilisable à n'importe quel endroit
 <h1>Un titre</h1>
 <h2>Un sous-titre</h2>
 <p><?php echo $message; ?></p>
-````
+```
 
 La différence entre guillemets simples et doubles apparaît lorsqu'on inclut une variable dans une chaîne de caractères. 
 
@@ -97,7 +97,7 @@ La différence entre guillemets simples et doubles apparaît lorsqu'on inclut un
 <?php $age = "39"; ?>
 <p><?php echo "Vous avez $age ans"; ?></p>
 <p><?php echo 'Vous avez $age ans'; ?></p>
-````
+```
 
 Le premier `echo` affiche : `Vous avez 39 ans`.
 Le second `echo` affiche : `Vous avez $age ans`.
