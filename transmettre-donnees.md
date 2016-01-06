@@ -22,7 +22,48 @@ if (isset($_GET['nom']) {
 
 ## Transmission via un formulaire
 
-Les formulaires sont le moyen le plus pratique pour le visiteur de transmettre des informations à un site. PHP est capable de récupérer les données saisies par vos visiteurs et de les traiter. Les données envoyées via un formulaire sont ajoutées dans le corps de la requête HTTP et se retrouvent dans un tableau associatif nommé `$_POST` défini automatiquement par PHP.
+Les formulaires sont le moyen le plus pratique pour le visiteur de transmettre des informations à un site. PHP est capable de récupérer les données saisies par vos visiteurs et de les traiter. 
+
+### Création d'un formulaire
+
+On ajoute un formulaire à une page Web grâce à la base HTML `<form>`.
+
+```html
+<!doctype html>
+<html>
+    <head>
+        <title>Mon premier formulaire</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+         <form action="login.php" method="post"> 
+            <p>Entrez votre login :
+                <input type="text" name="login" size="20" required /></p>
+            <p>Entrez votre mot de passe :
+                <input type="password" name="password" size="20" required /></p>
+            <input type="submit" value="Envoyer" />
+         </form>
+    </body>
+</html>
+```
+
+La balise HTML `<form>` possède deux attributs importants :
+
+* `action` permet de définir l'URL qui traitera les informations soumises par le formulaire, lorsque l'utilisateur le validera en cliquant sur le bouton de type submit (ici "Envoyer").
+* `method` permet de définir le type de requête HTTP utilisée pour envoyer les données à l'URL d'action. Ici, ce sera une requête POST, le cas le plus fréquent avec les formulaires.
+
+### Récupération des données d'un formulaire
+
+Les données envoyées via un formulaire sont ajoutées dans le corps de la requête HTTP et se retrouvent dans un tableau associatif nommé `$_POST` défini automatiquement par PHP.
+
+```php
+// récupération des zones de saisie dans des variables
+$login = $_POST["login"];
+$mdp = $_POST["password"];
+// ...
+```
+
+### Envoi de fichiers avec un formulaire
 
 Les formulaires permettent également d'envoyer des fichiers. On retrouve les informations sur les fichiers envoyés dans un tableau associatif nommé `$_FILES`.
 
