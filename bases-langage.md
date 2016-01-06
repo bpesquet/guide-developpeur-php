@@ -1,8 +1,8 @@
 # Les bases du langage
 
-## Fichiers source PHP
+## Anatomie d'un fichier source PHP
 
-Le code PHP est écrit dans des fichiers source portant l'extension `.php`. Le plus souvent, un fichier source PHP contient un mélange de balises HTML et de code PHP. Au moment où un client demande ce fichier à un serveur Web, le code PHP est exécuté par le serveur pour produire une page Web dynamique.
+Le code PHP est écrit dans des fichiers source portant l'extension `.php`. Le plus souvent, un fichier source PHP contient un mélange de balises HTML et de code PHP. Au moment où un client demande ce fichier à un serveur Web, le code PHP est exécuté par le serveur pour produire dynamiquement une page Web.
 
 ![](images/intro-dev-web/web_php_htmlcss.png)
 
@@ -26,19 +26,6 @@ Dans un fichier source PHP, on définit une portion de code PHP gràce aux balis
         <?php echo "<h3>Celui-là est entièrement généré avec PHP</h3>"; ?>
     </body>
 </html>
-```
-
-## Commentaires
-
-A l'intérieur d'un bloc de code PHP, on peut ajouter des commentaires avec les symboles communs à de nombreux langages de programmation : `//` pour un commentaire sur une seule ligne et `/* ... */` pour un commentaire sur plusieurs lignes. 
-
-A l'extérieur d'un bloc PHP, on utilise la syntaxe HTML `<!-- ... -->` pour ajouter des commentaires.
-
-```php
-<h1>Affichons du texte avec PHP...</h1>  <!-- un commentaire HTML -->
-...
-<?php echo "<h3>Celui-là est entièrement généré avec PHP</h3>"; 
-// un commentaire PHP?>
 ```
 
 ## Affichage de texte
@@ -71,6 +58,19 @@ Il est possible de concaténer (assembler) plusieurs chaînes de caractères au 
 
 Chaque ligne ci-dessus affiche le texte `Bonjour Monde !`.
 
+## Commentaires
+
+A l'intérieur d'un bloc de code PHP, on peut ajouter des commentaires avec les symboles communs à de nombreux langages de programmation : `//` pour un commentaire sur une seule ligne et `/* ... */` pour un commentaire sur plusieurs lignes. 
+
+A l'extérieur d'un bloc PHP, on utilise la syntaxe HTML `<!-- ... -->` pour ajouter des commentaires.
+
+```php
+<h1>Affichons du texte avec PHP...</h1>  <!-- un commentaire HTML -->
+...
+<?php echo "<h3>Celui-là est entièrement généré avec PHP</h3>"; 
+// un commentaire PHP ?>
+```
+
 ## Variables
 
 Une variable joue en PHP le même rôle que dans tout autre langage : stocker une information. Une variable PHP est définie par un nom qui commence obligatoirement par le symbole `$`.
@@ -80,7 +80,7 @@ Une variable joue en PHP le même rôle que dans tout autre langage : stocker un
 echo $message; ?>
 ```
 
-On remarque au passage que la variable `$message` n'a pas de type explicite comme `string` ou `int`. PHP n'impose pas au programmeur de définir les types des variables. On parle de **typage dynamique**.
+On remarque au passage que la variable `$message` n'a pas un type explicite comme `string` ou `int`. PHP n'impose pas au programmeur de définir les types des variables. On parle de **typage dynamique**.
 
 Après sa définition, une variable PHP est utilisable à n'importe quel endroit de la page, même dans un autre bloc de code.
 
@@ -103,3 +103,33 @@ Le premier `echo` affiche : `Vous avez 39 ans`.
 Le second `echo` affiche : `Vous avez $age ans`.
 
 Lorsqu'on utilise des guillemets doubles pour définir une chaîne de caractères, les variables sont interprétées (remplacées par leur valeur). Ce n'est pas le cas avec des guillemets simples.
+
+## Inclure des portions de page
+
+Un fichier PHP peut inclure le contenu d'un autre fichier grâce à l'instruction `include`.
+
+```php
+<?php include 'monfichier.php`?>
+```
+
+Au moment de l'exécution, cette instruction sera remplacée par le contenu du fichier inclus. 
+
+Cette technique permet de centraliser le code des éléments communs à plusieurs fichiers PHP, comme par exemple des menus ou des pieds de page, pour éviter la duplication de code.
+
+```php
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Une page PHP modulaire</title>
+    </head>
+    <body>
+        <?php include 'header.php'; ?>
+        <?php include 'menu.php'; ?>
+        
+        <!-- ... (contenu spécifique) -->
+        
+        <?php include 'footer.php'; ?>
+    </body>
+</html>
+```
