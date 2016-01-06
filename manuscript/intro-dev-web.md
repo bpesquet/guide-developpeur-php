@@ -28,7 +28,7 @@ D'autres types de logiciels que les navigateurs peuvent jouer le rôle de client
 
 La compréhension des échanges ayant lieu entre un client et un serveur Web lors de la consultation d'un site est essentielle. Il s'agit d'un mécanisme de type **requête/réponse**.
 
-![](images/intro-dev-web/web_http_echange.png)
+![Exemple d'échange entre client et serveur](images/intro-dev-web/web_http_echange.png)
 
 1. L'échange est initié par le client, qui envoie au serveur une requête pour consulter une ressource Web.
 2. Le serveur prépare la page HTML associée.
