@@ -6,7 +6,7 @@ L'objectif de ce chapitre est de savoir utiliser les structures de bases de la p
 
 ### Définition d'une variable
 
-Une variable joue en PHP le même rôle que dans tout autre langage : stocker une information. Une variable PHP est définie par un nom qui commence obligatoirement par le symbole `$`.`
+Une variable joue en PHP le même rôle que dans tout autre langage : stocker une information. Une variable PHP est définie par un nom qui commence obligatoirement par le symbole `$`.
 
 ```
 <?php $message = "Bonjour Monde !";
@@ -88,19 +88,20 @@ L'instruction `if` est associée à une condition. C'est une expression (une com
 
 Toute expression renvoyant une valeur booléenne peut être utilisée comme condition avec un `if`. C'est le cas des expressions utilisant des opérateurs de comparaison, dont voici la liste.
 
-|Opérateur|Signification
-|==|Egal à
-|!=|Différent de
-|<|Inférieur strictement
-|<=|Inférieur ou égal
-|>|Supérieur strictement
-|>=|Supérieur ou égal
+| Opérateur | Signification|
+|-----------|--------------|
+| == | Egal à|
+| != | Différent de|
+| < | Inférieur strictement|
+| <= | Inférieur ou égal|
+| > | Supérieur strictement|
+| >= | Supérieur ou égal|
 
-**Note** : la plupart des langages de programmation utilisent le symbole `=`` pour symboliser l'affectation, et le symbole `==`` pour l'égalité. Attention aux confusions avec le sens mathématique de l'opérateur `=`.`
+**Note** : la plupart des langages de programmation utilisent le symbole `=` pour symboliser l'affectation, et le symbole `==` pour l'égalité. Attention aux confusions avec le sens mathématique de l'opérateur `=`.
 
 ### Les opérateurs logiques
 
-On peut définir des conditions plus complexes ("La valeur de X est entre 100 et 200") grâce aux opérateurs logiques. Ceux du langage PHP sont les suivants : `&&`` (Et), `||`` (Ou), `!` (Non).
+On peut définir des conditions plus complexes ("La valeur de X est entre 100 et 200") grâce aux opérateurs logiques. Ceux du langage PHP sont les suivants : `&&` (Et), `||` (Ou), `!` (Non).
 
 ### L'instruction `switch`
 
@@ -127,7 +128,7 @@ switch ($nombre) {
 
 Il n'y a pas de limite au nombre de cas possibles. Le mot-clé `default`, à placer en fin de switch, est optionnel. Il sert souvent à gérer les cas d'erreurs.
 
-Les instructions `break;`` dans les blocs case sont indispensables pour éviter de passer d'un bloc à un autre.
+Les instructions `break;` dans les blocs `case` sont indispensables pour éviter de passer d'un bloc à un autre.
 
 ## Tableaux
 
@@ -280,7 +281,7 @@ Les paramètres utilisés dans la définition du sous-programme sont appelés pa
 
 ```php
 <?php
-// $a et $b sont les paramètres de la fonctions
+// $a et $b sont les paramètres de la fonction
 function multiplier($a, $b) { 
     return $a * $b;
 }
@@ -288,10 +289,13 @@ function multiplier($a, $b) {
 $nb1 = 3;
 $nb2 = 7.5;
 // $nb1 et $nb2 sont les arguments de l'appel de la fonction
-$resultat = multiplier($nb1, $nb2); 
+$resultat = multiplier($nb1, $nb2);
+// La variable $resultat vaut maintenant 22.5
 ?>
 ```
 
 Le plus souvent, on externalise la définition des fonctions dans un fichier dédié qui est inclus dans la page utilisant la fonction.
 
+```php
 <?php include('fonctions.php'); ?>
+```
