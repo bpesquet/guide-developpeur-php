@@ -2,6 +2,8 @@
 
 L'objectif de ce chapitre est de découvrir les notions fondamentales liées au développement Web.
 
+![](images/intro-dev-web/dev-web.png)
+
 **Note** : ce chapitre s'inspire de la [documentation du framework PHP Symfony](http://symfony.com/doc/current/book/from_flat_php_to_symfony2.html).
 
 ## Le fonctionnement du Web
