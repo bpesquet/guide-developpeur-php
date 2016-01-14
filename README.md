@@ -21,7 +21,7 @@ La seconde partie est consacrée à des notions plus avancées :
 La lecture de la première partie suppose les pré-requis suivants.
 
 - Bases de la programmation : variables, structures de contrôle (alternatives, boucles), fonctions, tableaux.
-- Notions élémentaires de programmation orientée objet : création d'objets, utilisations de méthodes.
+- Notions élémentaires de programmation orientée objet : création d'objets, appel de méthodes.
 - Conaissance des langages fondamentaux du Web : HTML et CSS.
 
 La seconde partie nécessite certains pré-requis supplémentaires.

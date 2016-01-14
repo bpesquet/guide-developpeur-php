@@ -6,7 +6,7 @@ L'objectif de ce chapitre est de découvrir les bases du langage PHP.
 
 Le code PHP est écrit dans des fichiers source portant l'extension `.php`. Le plus souvent, un fichier source PHP contient un mélange de balises HTML et de code PHP. Au moment où un client demande ce fichier à un serveur Web, le code PHP est exécuté par le serveur pour produire dynamiquement une page Web.
 
-![](images/intro-dev-web/web_php_htmlcss.png)
+![](images/bases-langage/web_php_htmlcss.png)
 
 **Attention** : un fichier contenant du code PHP mais portant l'extension `.html` sera renvoyé directement par le serveur sans exécution du code PHP qu'il contient.
 

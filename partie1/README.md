@@ -1,4 +1,4 @@
-# Découvrir PHP
+# Partie 1 : découvrir PHP
 
 L'objectif de cette partie est d'apprendre à créer un site Web simple mais fonctionnel et un minimum sécurisé en utilisant le langage PHP.
 
