@@ -93,8 +93,8 @@ Enfin, la réponse HTTP contient éventuellement la ressource demandée par le c
 
 Les codes de retour HTTP peuvent être classés par familles en fonction du premier chiffre.
 
-Famille | Significatio | Exemples
---------|--------------|---------
+Famille | Signification | Exemples
+--------|---------------|---------
 **1xx** | Information |
 **2xx** | Succès | 200 : requête traitée avec succès
 **3xx** | Redirection |
@@ -156,7 +156,7 @@ Pour créer un site Web dynamique. il faut obligatoireement utiliser un langage 
 
 On constate que la technologie la plus populaire est PHP, suivie de loin par ASP.NET (Microsoft) et Java (ORACLE). Les technologies ASP.NET et Java sont plus souvent employées pour des sites complexes avec d'importants besoins en matière de performances et de montée en charge. Ces sites sont assez peu nombreux, d'où la domination globale de PHP. 
 
-**Note** : cela ne veut pas dire que le langage PHP ne peut pas, lui aussi, être employé dans des contextes exigeants.
+**Note** : cela ne veut pas dire que le langage PHP ne puisse pas, lui aussi, être employé dans des contextes exigeants.
 
 PHP est particulièrement dominant dans le secteur des CMS, ces logiciels qui permettent de publier du contenu en ligne sans presque aucune connaissance technique. On peut citer comme exemples Wordpress, Drupal ou Joomla. La position dominante de PHP s'explique également par la richesse de son écosystème : librairies, frameworks, etc. 
 
