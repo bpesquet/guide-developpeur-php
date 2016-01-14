@@ -2,7 +2,7 @@
 
 ## Résumé
 
-Ce livre rassemble les informations essentielles pour (bien) développer avec le langage PHP.
+Ce guide rassemble les informations essentielles pour (bien) développer avec le langage PHP.
 
 Il se divise en deux parties. La première permet de découvrir PHP et aborde les aspects suivants :
 - Introduction au développement Web
@@ -30,14 +30,14 @@ La seconde partie nécessite certains pré-requis supplémentaires.
 
 ## Remerciements
 
-Ce livre reprend certains éléments des cours OpenClassrooms[
+Ce guide reprend certains éléments des cours OpenClassrooms[
 Concevez votre site web avec PHP et MySQL](https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql) et [Évoluez vers une architecture PHP professionnelle](https://openclassrooms.com/courses/evoluez-vers-une-architecture-php-professionnelle).
 
 Il s'inspire également des cours PHP de mes collègues de BTS SIO au [lycée La Martinière Duchère](http://lmdsio.fr) de Lyon, en particulier Aline Bourelly.
 
 ## Contributions
 
-Ce livre est publié sous la licence Creative Commons [BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/). Son code source est disponible sur [GitHub](https://github.com/bpesquet/guide-developpeur-php). N'hésitez pas à contribuer à son amélioration en utilisant les *issues* pour signaler des erreurs et les *pull requests* pour proposer des ajouts ou des corrections.
+Ce guide est publié sous la licence Creative Commons [BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/). Son code source est disponible sur [GitHub](https://github.com/bpesquet/guide-developpeur-php). N'hésitez pas à contribuer à son amélioration en utilisant les *issues* pour signaler des erreurs et les *pull requests* pour proposer des ajouts ou des corrections.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
