@@ -1,6 +1,6 @@
-# Développement Web avec PHP
+# Découvrir PHP
 
-L'objectif de cette partie est de savoir développer un site Web fonctionnel et sécurisé en utilisant le langage PHP.
+L'objectif de cette partie est d'apprendre à créer un site Web simple mais fonctionnel et un minimum sécurisé en utilisant le langage PHP.
 
 Nous allons découvrir comment :
 
