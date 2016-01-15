@@ -2,15 +2,15 @@
 
 ## Introduction
 
-Vous connaissez à présent les bases du langage PHP et vous savez transmettre des informations d'une page à une autre. Cependant, il nous reste à étudier le moyen de stocker des données de manière persistante. Ainsi, nous pourrions mémoriser les informations saisies par les utilisateurs, ou bien construire des pages dynamiques à partir des données externes.
+Vous connaissez à présent les bases du langage PHP et vous savez transmettre des informations d'une page à une autre. Cependant, il nous reste à étudier le moyen de stocker des données de manière persistante. Ainsi, nous pourrons mémoriser les informations saisies par les utilisateurs, ou bien construire des pages dynamiques à partir des données externes.
 
-**Définition** : une donnée est dite persistante lorsqu'elle survit à l'arrêt du logiciel ou de la machine qui la manipule. Le contraire de "persistante" est "volatile".
+**Définition** : une donnée est dite **persistante** lorsqu'elle survit à l'arrêt du logiciel ou de la machine qui la manipule. Le contraire de "persistante" est "volatile".
 
 Actuellement, la technique la plus utilisée pour rendre des données persistantes consiste à les sauvegarder dans un logiciel dédié appelé SGBDR ou Système de Gestion de Bases de Données Relationelles. Parmi les SGBDR les plus connus, citons MySQL, PostgreSQL ou encore ORACLE.
 
 Nous allons donc étudier comment interagir avec un SGBDR depuis une page PHP. Pour cela, nous allons utiliser une extension récente du langage PHP appelée PDO (*Php Data Objects*). Par rapport aux autres solutions existantes, PDO possède le double avantage d'être orientée objet et d'être indépendante du SGBDR utilisé.
 
-Le schéma ci-dessous décrit l'architecture que nous allons mettre en oeuvre. Il s'agit d'un exemple d'architecture trois tiers (client, serveur Web, SGBD). Le rôle de PDO va être de faire le lien entre les pages PHP du serveur et les données stockées dans le SGBDR.
+Le schéma ci-dessous décrit l'architecture que nous allons mettre en oeuvre. Il s'agit d'un exemple d'**architecture trois tiers** (client, serveur Web, SGBD). Le rôle de PDO va être de faire le lien entre les pages PHP du serveur et les données stockées dans le SGBDR.
 
 ![](images/acces-bd/archi-pdo.gif)
 
@@ -25,10 +25,10 @@ $bdd = new PDO("mysql:host=localhost;dbname=mabase;charset=utf8",
 
 Le constructeur utilisé ici comporte quatre paramètres :
 
-* Le premier paramètre (`mysql:...`) définit le nom de la source de données (DSN, *Data Source Name*). Ce nom contient le nom et le type du SGBD (ici MySQL sur la machine locale, `localhost`), le nom de la base de données (ici `mabase`) et le jeu de caractères utilisé (ici `utf8`). 
+* Le premier paramètre (`mysql:...`) définit le nom de la source de données ou DSN, *Data Source Name*. Ce nom contient le nom et le type du SGBD (ici MySQL sur la machine locale, `localhost`), le nom de la base de données (ici `mabase`) et le jeu de caractères utilisé (ici `utf8`). 
 * Le deuxième paramètre (`mabase_util`) est le login utilisé pour se connecter à la BD. Il doit auparavant avoir été créé au niveau du SGBDR.
 * Le troisième paramètre (`mabase_mdp`) est le mot de passe associé au login.
-* Le quatrième paramètre (`PDO::...`) est relatif à la gestion des erreurs.
+* Le quatrième paramètre (`array(PDO::...)`) est relatif à la gestion des erreurs.
 
 **Note** : il est déconseillé d'utiliser le login `root` ayant tous les droits pour se connecter à une base de données depuis du code PHP.
 
@@ -69,15 +69,17 @@ while ($ligne = $resultat->fetch()) {
 ```php
 // ...
 
+// Récupération des données résultats de la requête
+$donnees = $resultat->fetchAll();
 // Itération sur les résultats de la requête SQL
-foreach ($resultat as $ligne) {
+foreach ($donnees as $ligne) {
     // On accède à la valeur de macolonne avec $ligne['macolonne'];
     // ...
 }
 ?>
 ```
 
-Dans les deux cas, la variable $ligne s'utilise comme un tableau associatif. Elle rassemble les valeurs des différentes colonnes pour une ligne de résultat SQL.
+Dans les deux cas, la variable `$ligne` s'utilise comme un tableau associatif. Elle rassemble les valeurs des différentes colonnes pour une ligne de résultat SQL.
 
 ### Requêtes avec paramètres
 

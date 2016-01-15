@@ -151,7 +151,7 @@ else {
 
 ### Destruction d'une session
 
-En fin de visite, la destruction explicite d'une session se fait grâce à la fonction `session_destroy`. Après l'appel, la variable $_SESSION n'est plus utilisable.
+En fin de visite, la destruction explicite d'une session se fait grâce à la fonction `session_destroy`. Après l'appel, la variable `$_SESSION` n'est plus utilisable.
 
 **Rappel** : cette destruction est automatique au bout d'un certain temps d'inactivité.
 

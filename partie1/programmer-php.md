@@ -294,6 +294,8 @@ $resultat = multiplier($nb1, $nb2);
 ?>
 ```
 
+TODO Ajouter portée variables "globales" dans fonctions
+
 Le plus souvent, on externalise la définition des fonctions dans un fichier dédié qui est inclus dans la page utilisant la fonction.
 
 ```php
