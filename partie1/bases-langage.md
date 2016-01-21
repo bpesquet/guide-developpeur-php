@@ -10,6 +10,20 @@ Le code PHP est écrit dans des fichiers source portant l'extension `.php`. Le p
 
 **Attention** : un fichier contenant du code PHP mais portant l'extension `.html` sera renvoyé directement par le serveur sans exécution du code PHP qu'il contient.
 
+Il est fortement conseillé d'adopter le standard HTML5 ainsi que le jeu de caractères Unicode UTF-8 (sans BOM). Tous les fichiers source doivent être encodés avec ce jeu de caractères pour que les caractères accentués soient affichés correctment, et la structure HTML doit être identique à celle ci-dessous.
+
+~~~
+<!doctype html>
+<head>
+    <meta charset="utf-8" />
+    ...
+</head>
+<body>
+    ...
+</body>
+</html>
+~~~
+
 ## Définition d'un bloc de code PHP
 
 Dans un fichier source PHP, on définit une portion de code PHP gràce aux balises `<?php` et `?>`. Il est possible de définir plusieurs blocs de code dans un même fichier source PHP. A l'intérieur d'un bloc de code, on peut utiliser les fonctionnalités du langage. Chaque instruction doit se terminer par le symbole `;`.
@@ -45,7 +59,7 @@ On peut inclure des balises HTML dans le texte affiché par `echo`, ou bien incl
 <p><?php echo "Bonjour Monde !"; ?></p>
 ```
 
-**Conseil** : sauf cas particulier, on utilisera plutôt la seconde technique, qui préserve la structure HTML de la page. 
+**Conseil** : sauf cas particulier, on utilisera plutôt la seconde technique, qui préserve mieux la structure HTML de la page. 
 
 **Note** : il existe une syntaxe plus concise pour afficher du texte. Le code PHP `<?= "Hello" ?>` équivaut à `<?php echo "Hello"; ?>`.
 
@@ -98,4 +112,4 @@ Une autre instruction PHP, `require`, joue le même rôle avec la différence su
 <?php require "monfichier.php"; ?>
 ```
 
-**Note** : il existe aussi les instructions `include_once` et `require_once` qui vérifient si le fichier a déjà été inclus, et si c'est le cas, ne l'incluent pas une deuxième fois.
+**Note** : il existe aussi des instructions `include_once` et `require_once` qui vérifient si le fichier a déjà été inclus, et si c'est le cas, ne l'incluent pas une deuxième fois.
