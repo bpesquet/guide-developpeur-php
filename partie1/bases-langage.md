@@ -47,7 +47,7 @@ On peut inclure des balises HTML dans le texte affiché par `echo`, ou bien incl
 
 **Conseil** : sauf cas particulier, on utilisera plutôt la seconde technique, qui préserve la structure HTML de la page. 
 
-TODO Ajout <?= ... ?>
+**Note** : il existe une syntaxe plus concise pour afficher du texte. Le code PHP `<?= "Hello" ?>` équivaut à `<?php echo "Hello"; ?>`.
 
 ## Commentaires
 
@@ -67,7 +67,7 @@ A l'extérieur d'un bloc PHP, on utilise la syntaxe HTML `<!-- ... -->` pour ajo
 Un fichier PHP peut inclure le contenu d'un autre fichier grâce à l'instruction `include`.
 
 ```php
-<?php include("monfichier.php"); ?>
+<?php include "monfichier.php"; ?>
 ```
 
 Au moment de l'exécution, cette instruction sera remplacée par le contenu du fichier inclus. 
@@ -82,14 +82,20 @@ Cette technique permet de centraliser le code des éléments communs à plusieur
         <title>Une page PHP modulaire</title>
     </head>
     <body>
-        <?php include("header.php"); ?>
-        <?php include("menu.php"); ?>
+        <?php include "header.php"; ?>
+        <?php include "menu.php"; ?>
         
         <!-- ... (contenu spécifique) -->
         
-        <?php include("footer.php"); ?>
+        <?php include "footer.php"; ?>
     </body>
 </html>
 ```
 
-TODO Ajout require et *_once
+Une autre instruction PHP, `require`, joue le même rôle avec la différence suivante : contrairement à `include`, `require` déclenche une erreur si le fichier à inclure est introuvable.
+
+```php
+<?php require "monfichier.php"; ?>
+```
+
+**Note** : il existe aussi les instructions `include_once` et `require_once` qui vérifient si le fichier a déjà été inclus, et si c'est le cas, ne l'incluent pas une deuxième fois.
