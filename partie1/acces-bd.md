@@ -12,7 +12,7 @@ Nous allons donc étudier comment interagir avec un SGBDR depuis une page PHP. P
 
 Le schéma ci-dessous décrit l'architecture que nous allons mettre en oeuvre. Il s'agit d'un exemple d'**architecture trois tiers** (client, serveur Web, SGBD). Le rôle de PDO va être de faire le lien entre les pages PHP du serveur et les données stockées dans le SGBDR.
 
-![](images/acces-bd/archi-pdo.gif)
+![](images/acces-bd/archi-pdo.png)
 
 ## Connexion à la base de données
 
@@ -30,17 +30,37 @@ Le constructeur utilisé ici comporte quatre paramètres :
 * Le troisième paramètre (`mabase_mdp`) est le mot de passe associé au login.
 * Le quatrième paramètre (`array(PDO::...)`) est relatif à la gestion des erreurs.
 
-**Note** : il est déconseillé d'utiliser le login `root` ayant tous les droits pour se connecter à une base de données depuis du code PHP.
+**Note** : il est déconseillé d'utiliser le login `root` ayant tous les droits pour se connecter à une base de données depuis du code PHP. Il vaut mieux créer dans MySQL un utilisateur dédié n'ayant des droits que sur cett base.
+
+On peut traiter immédiatement les erreurs (base de données introuvable, mauvais login ou mot de passe, etc) en intégrant la connexion dans un bloc `try/catch`. Il s'agit d'un mécanisme de gestion des erreurs utilisant les **exceptions**. Sans rentrer dans des détails inutiles, son fonctionnement est le suivant :
+
+1. Les instructions situées dans le bloc `try` sont exécutées.
+2. Si l'une des instructions du bloc `try` provoque une erreur, elle est interceptée par le bloc `catch`, dont les instructions sont alors exécutées.
+3. Si aucune instruction du bloc `try` n'échoue, le contenu du bloc `catch` est ignoré et l'exécution se poursuit.
+
+~~~php
+try {
+    $bdd = new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password", 
+        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));    
+}
+catch (Exception $e)
+{
+    die('Erreur fatale : ' . $e->getMessage());
+}
+// ...
+~~~
+
+Si un problème se produit pendant la connexion, l'exécution PHP est interrompue (fonction `die`) et un message d'erreur est affiché. Sinon, le reste de la page est exécuté normalement.
 
 La classe PDO dispose d'une [documentation en ligne](http://www.php.net/manual/fr/class.pdo.php).
 
 ## Exécution de requêtes SQL
 
-Une fois la connexion établie, il est possible d'utiliser l'objet instancié pour réaliser des opérations d'accès à la base. Pour cela, il faut écrire et exécuter des requêtes utilisant le langage SQL.
+Une fois la connexion établie, il est possible d'utiliser l'objet instancié pour réaliser des opérations d'accès à la base. Pour cela, il faut écrire et exécuter des requêtes en utilisant le langage SQL.
 
 ### Requêtes simples
 
-La méthode `query` de la classe `PDO` permet d'exécuter une requête SQL passée en paramètre.
+La méthode `query` de la classe `PDO` permet d'exécuter une requête SQL simple (sans paramètres).
 
 ```php
 // ...
@@ -48,15 +68,27 @@ $requete = "select * from employe";
 $resultat = $bdd->query($requete);
 ```
 
-Le symbole `->` est l'équivalent PHP du symbole `.` utilisé dans d'autres langages comme Java ou C#. L'instruction `$bdd->query se lit donc : "J'appelle la méthode query sur mon objet $bdd".
+Le symbole `->` est l'équivalent PHP du symbole `.` utilisé dans d'autres langages comme Java ou C#. L'instruction `$bdd->query` se lit : "J'appelle la méthode query sur mon objet $bdd".
 
 Après l'appel à `query`, on peut parcourir le résultat ligne par ligne en appelant à la méthode `fetch` sur le résultat de la requête.
 
-* Dans le cas d'une requête qui renvoie une seule ligne de résultat, un seul appel à `fetch` suffit.
+* Dans le cas d'une requête qui renvoie une seule ligne de résultat, un seul appel à `fetch` suffit. C'est notamment le cas lorsqu'on recherche un enregistrement à partir de sa clé primaire.
+
+~~~php
+// ...
+$requete = "select * from employe where id=1;";
+$resultat = $bdd->query($requete);
+
+$ligne = $resultat->fetch();
+// On accède à la valeur de macolonne avec $ligne['macolonne'];
+~~~
+
 * Si la requête renvoie plusieurs lignes de résultats, on peut itérer sur ces lignes avec une boucle `while` ou une boucle `foreach`.
 
 ```php
 // ...
+$requete = "select * from employe";
+$resultat = $bdd->query($requete);
 
 // Itération sur les résultats de la requête SQL
 while ($ligne = $resultat->fetch()) {
@@ -68,8 +100,10 @@ while ($ligne = $resultat->fetch()) {
 
 ```php
 // ...
+$requete = "select * from employe";
+$resultat = $bdd->query($requete);
 
-// Récupération des données résultats de la requête
+// Récupération de toutes les données résultats de la requête
 $donnees = $resultat->fetchAll();
 // Itération sur les résultats de la requête SQL
 foreach ($donnees as $ligne) {
@@ -79,7 +113,7 @@ foreach ($donnees as $ligne) {
 ?>
 ```
 
-Dans les deux cas, la variable `$ligne` s'utilise comme un tableau associatif. Elle rassemble les valeurs des différentes colonnes pour une ligne de résultat SQL.
+Dans tous les cas, la variable `$ligne` s'utilise comme un tableau associatif. Elle rassemble les valeurs des différentes colonnes pour une ligne de résultat SQL.
 
 ### Requêtes avec paramètres
 
@@ -99,12 +133,21 @@ $codeService = $_POST['service'];
 $req->execute(array($codeService));
 ```
 
-Ce code source utilise ce qu'on appelle une **requête préparée**. Il s'agit d'une technique dans laquelle on définit d'abord une requête (appel de la méthode `prepare` sur l'objet `$bdd`) en prévoyant ses différents paramètres, indiqués par des `?` dans le code SQL. Ensuite, on exécute la requête préparée (méthode `execute` sur l'objet `$req`). Lors ce cet appel, on passe les paramètres nécessaires sous la forme d'un tableau.
+Ce code source utilise ce qu'on appelle une **requête préparée**. Il s'agit d'une technique dans laquelle on définit d'abord le squelette de la requête (appel de la méthode `prepare` sur l'objet `$bdd`) en prévoyant ses différents paramètres, indiqués par des `?` dans le code SQL. Ensuite, on exécute la requête préparée (méthode `execute` sur l'objet `$req`). Lors de cet appel, on passe les paramètres nécessaires sous la forme d'un tableau.
 
 **Avertissement** : le tableau des paramètres doit contenir autant d'élément qu'il y a de `?` dans la requête préparée. L'ordre doit également être respecté.
 
-**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']` reçue du formulaire. Cette opération est effectuée automatiquement par le SGBDR au moment de l'exécution de la requête.
+Outre le gain de temps lorsqu'une même requête est exécutée plusieurs fois avec des paramètres différents, l'utilisation d'une requête préparée évite de construire une requête SQL en y intégrant directement des données utilisateur. 
 
-Outre le gain de temps lorsqu'une même requête est exécutée plusieurs fois avec des paramètres différents, l'utilisation d'une requête préparée évite d'inclure directement des données utilisateur dans une requête SQL. Ainsi, la base de données est protégée contre les attaques de type "injection SQL".
+~~~php
+// DANGEREUX : A EVITER ABSOLUMENT
+$requete = "select * from employe where servempl=" . $_POST['service'];
+~~~
+
+La technique ci-dessus rend la base vulnérable aux attaques de type "injection SQL". L'injection SQL consiste à faire exécuter des requêtes SQL imprévues par le SGBDR, ce qui peut conduire à de graves problèmes de sécurité.
 
 ![](images/acces-bd/sql_injection.png)
+
+Ce risque de sécurité n'existe pas lorsqu'on utilise des requêtes préparées, 
+
+**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']` reçue du formulaire. L'appel à `htmlspecialchars` désactive l'exécution de code JavaScript mais ne présente aucun intérêt dans le cas de données utilisées dans des requêtes SQL.
