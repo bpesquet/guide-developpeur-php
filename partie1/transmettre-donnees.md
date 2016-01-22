@@ -2,15 +2,21 @@
 
 L'objectif de ce chapitre est de connaître les différents moyens de faire passer des informations d'une page PHP à l'autre, ce qui est un besoin fréquent lorsqu'on crée un site Web.
 
+## Notion de variable superglobale
+
+Une **variable superglobale** est une variable PHP particulière créée par le langage et non par le développeur. Elle a comme particularité d'être disponible partout dans le code (d'où son nom). La plupart du temps, elle commence par le symbole `$_`. Une variable superglobale s'utilise comme un tableau associatif : elle associe des clés et des valeurs.
+
+Les informations transmises entre pages PHP sont memorisées dans des variables superglobales particulières que nous allons maintenant découvrir.
+
 ## Transmission via l'URL
 
 Une URL représente l'adresse d'une page web et commence par `http://` ou `https://`. Lorsqu'on fait un lien vers une autre page, il est possible d'ajouter des paramètres sous la forme `bonjour.php?nom=Dupont&prenom=Jean` qui seront transmis à la page.
 
 ![](images/transmettre-donnees/url_get_parameters.png)
 
-On peut transmettre autant de paramètres que l'on veut dans une URL, la seule limite étant de ne pas dépasser une longueur totoale de 256 caractères.
+On peut transmettre autant de paramètres que l'on veut dans une URL, la seule limite étant de ne pas dépasser une longueur totale de 256 caractères.
 
-Dans ce cas, la page `bonjour.php` recevra ces paramètres dans un tableau associatif nommé `$_GET` et défini automatiquement par PHP :
+Dans ce cas, la page `bonjour.php` recevra ces paramètres dans la variable superglobale `$_GET` et défini automatiquement par PHP :
 
 * `$_GET['nom']` aura pour valeur `Dupont` ;
 * `$_GET['prenom']` aura pour valeur `Jean`.
@@ -21,10 +27,10 @@ Avant d'utiliser un paramètre transmis dans l'URL, on doit utiliser la fonction
 if (isset($_GET['nom']) {
     // Utilisation de $_GET['nom']
     // ...
-})
+}
 ```
 
-Si un paramètre provenant de l'URL est destiné à être affiché dans la page HTML générée par PHP (exemple : `<?php echo $_GET['nom']; ?>`), il faut également prendre une précaution supplémentaire pour éviter certaines failles de sécurité (voir plus bas).
+Si un paramètre provenant de l'URL est destiné à être affiché dans la page HTML générée par PHP (exemple : `<?php echo $_GET['nom']; ?>`), il faut également prendre une précaution supplémentaire pour éviter certaines failles de sécurité (voir plus loin).
 
 ## Transmission via un formulaire
 
@@ -55,20 +61,18 @@ On ajoute un formulaire à une page Web grâce à la balise HTML `<form>`.
 
 La balise HTML `<form>` possède deux attributs importants :
 
-* `action` permet de définir l'URL qui traitera les informations soumises par le formulaire, lorsque l'utilisateur le validera en cliquant sur le bouton de type `submit` (ici "Envoyer").
+* `action` permet de définir l'URL cible qui traitera les informations soumises par le formulaire, lorsque l'utilisateur le validera en cliquant sur le bouton de type `submit` (ici "Envoyer").
 * `method` permet de définir le type de requête HTTP utilisée pour envoyer les données à l'URL d'action. Ici, ce sera une requête `POST`, le cas le plus fréquent avec les formulaires.
 
 **Note** : on peut également utiliser la méthode `GET` avec un formulaire, mais dans ce cas les paramètres seront visibles dans l'URL et on court le risque de dépasser la taille maximale de 256 caractères.
 
-A l'intérieur d'un formulaire, les balises HTML `<input>` permettent de définir des champs de saisie pour l'utilisateur. L'attribut `name` d'une balise `<input>` définit le nom de la variable qui contiendra la valeur saisie.
-
 ### Récupération des données d'un formulaire
+
+A l'intérieur d'un formulaire, les balises HTML `<input>` permettent de définir des champs de saisie pour l'utilisateur. L'attribut `name` d'une balise `<input>` définit le nom de la variable qui contiendra la valeur saisie.
 
 Lorsque l'utilisateur soumet un formulaire, la ressource identifiée par l'attribut `action` de la balise `<form>` reçoit les données du formulaire et peut les traiter.
 
 Si le formulaire est soumis avec la méthode `POST`, les données envoyées via un formulaire sont ajoutées dans le corps de la requête HTTP et se retrouvent dans un tableau associatif nommé `$_POST` défini automatiquement par PHP.
-
-Comme toutes les variables superglobales, `$_POST` s'utilise comme un tableau associatif :
 
 * Les clés de ce tableau sont les noms des champs du formulaire (attributs `name` des balises `<input>` du formulaire).
 * Les valeurs associées aux clés sont les données saisies par l'utilisateur dans chaque champ.
@@ -82,9 +86,24 @@ $mdp = $_POST["password"];
 
 A des fins de débogage, on peut afficher le contenu de `$_POST` en ajoutant une instruction `print_r($_POST)`.
 
+**Note** : rien n'empêche une page PHP intégrant un formulaire d'être définie comme cible de ce formulaire par l'attribut `action` (on parle parfois de *page réentrante*). Dans ce cas, cette page doit être capable aussi bien d'afficher le formulaire que de traiter ses données. On fait la distinction en testant le contenu de la variable `$_POST`, le plus souvent en début de page.
+
+```php
+if (isset($_POST['login'] && isset($_POST['password']) {
+    // Le formulaire a été soumis : récupération des informations
+    $login = $_POST["login"];
+    $mdp = $_POST["password"];
+    // ...
+}
+else {
+    // Le formulaire n'a pas été soumis
+    // ...
+}
+```
+
 ### Types de champs de saisie
 
-L'attribut `type` d'une balise `<input>` permet de préciser le type de donnée à saisir et est interprétée par le navigateur pour améliorer l'expérience utilisateur.
+L'attribut `type` d'une balise `<input>` permet de préciser le type de donnée à saisir.
 
 * Pour faire saisir un texte court (une seule ligne), on utilise une balise `<input type="text" ...>`. On peut définir la valeur initiale du champ en ajout l'attribut `value`.
 
@@ -104,7 +123,7 @@ L'attribut `type` d'une balise `<input>` permet de préciser le type de donnée 
 <textarea name="message" rows="6">Entrez votre message</textarea>
 ~~~
 
-* Pour faire saisir une valeur binaire (oui/non, vrai/faux, etc), on utilise une balise `<input type="checkbox" ...>`. L'attribut `checked`, s'il est présent, précise que la case est cochée par défaut.
+* Pour faire saisir une donnée n'ayant que deux valeurs possibles, on utilise une balise `<input type="checkbox" ...>`. L'attribut `checked`, s'il est présent, précise que la case est cochée par défaut.
 
 ~~~html
 <input type="checkbox" name="familier" checked />
@@ -120,7 +139,7 @@ else {
 }
 ~~~
 
-* Pour faire saisir un choix parmi plusieurs, on utilise des balises `<input type="radio" ...>` ayant la même valeur pour l'attribut `name`. On crée ainsi une série de boutons radios dont seul l'un pourra être coché par l'utilisateur. 
+* Pour faire saisir un choix parmi plusieurs, on utilise des balises `<input type="radio" ...>` ayant la même valeur pour l'attribut `name`. On crée ainsi une série de boutons radios dont seul l'un pourra être sélectionné par l'utilisateur. 
 
 ~~~html
 <input type="radio" name="politesse" value="1" checked /> Mademoiselle<br />
@@ -128,7 +147,7 @@ else {
 <input type="radio" name="politesse" value="3" /> Monsieur<br />
 ~~~
 
-Lors de la récupération des données du formulaire, on examine la valeur du champ afin d'en déduire la case cochée. Cette valeur correspond à l'attribut `value` du bouton sélectionné.
+Lors de la récupération des données du formulaire, on examine la valeur du champ. Cette valeur correspond à l'attribut `value` du bouton sélectionné.
 
 ~~~php
 $message = "Bonjour, ";
@@ -146,7 +165,7 @@ case 3:
 }
 ~~~
 
-* Une autre possibilité pour faire saisir un choix parmi plusieurs est de définir une liste déroulante grâce à une balise `<select>`. A l'intérieur de cette balise, on ajoute des choix possibles grâce à la balise <option>.
+* Une autre possibilité pour faire saisir un choix parmi plusieurs est de définir une liste déroulante grâce à une balise `<select>`. A l'intérieur de cette balise, on ajoute des choix possibles grâce à la balise `<option>`. L'attribut `size` de la balise `<select>` définit le nombre d'éléments affichés par la liste. L'élément sélectionné par défaut est indiqué par l'attribut `selected`.
 
 ~~~html
 <select name="catpro" size="1">
@@ -155,8 +174,6 @@ case 3:
     <option value="CP3"> Cadre</option>
 </select>
 ~~~
-
-L'attribut `size` de la balise `<select>`` définit le nombre d'éléments affichés par la liste. L'élément sélectionné par défaut est indiqué par l'attribut `selected`.
 
 Lors de la récupération des données du formulaire, on examine la valeur du champ pour trouver l'élément qui a été sélectionné. Cette valeur correspond à l'attribut `value` de l'élément choisi.
 
@@ -167,21 +184,14 @@ elseif ($codecat == "CP2") $categorie = "Salarié";
 elseif ($codecat == "CP3") $categorie = "Cadre";
 ~~~
 
-#### Autres types de champs
-
-    * `<input type="email" ...>` : saisie d'une adresse de courriel.
-    * `<input type="number" ...>` : saisie d'un nombre.
-    * `<input type="date" ...>` : saisie d'une date.
-    * ... ([liste des types de champ](https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input)).
-
-#### Amélioration de l'expérience utilisateur
+#### Aide à la saisie et validation
 
 Deux attributs des balises de saisie permettent d'aider l'utilisateur du formulaire dans sa saisie :
 
 * `autofocus` (booléen) place le curseur de saisie sur le champ au chargement du formulaire.
 * `placeholder` définit le contenu par défaut du champ.
 
-La norme HTML5 a apporté de nouveaux types de champs comme `email`, `number` ou `date`. En voici la [liste complète](https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input).
+La norme HTML5 a apporté de nouveaux types de champs comme `email`, `number` ou `date`.
 
 ~~~html
 <input type="email" name="courriel" />
@@ -189,7 +199,7 @@ La norme HTML5 a apporté de nouveaux types de champs comme `email`, `number` ou
 
 Les navigateurs modernes interprètent ce type pour :
 
-* Améliorer l'expérience de saisie (exemple : un calendrier déroulant pour un champ de type `date`).
+* Améliorer l'expérience utilisateur pendant la saisie (exemple : un calendrier déroulant pour un champ de type `date`).
 * Valider la saisie avant envoi de la requête au serveur (exemple : vérification de la présence d'un `@` pour un champ de type `email`). 
 
 Il est également possible de rendre un champ obligatoire grâce à l'attribut booléen `required`.
@@ -198,25 +208,57 @@ Il est également possible de rendre un champ obligatoire grâce à l'attribut b
 <input type="email" name="courriel" required />
 ~~~
 
-Malgré tout, la validation finale des valeurs saisies dans un formulaire doit toujours se faire côté serveur (par exemple avec PHP) pour des raisons de sécurité.
+Malgré tout, la validation finale des valeurs saisies dans un formulaire doit toujours se faire aussi côté serveur (par exemple avec PHP) pour des raisons de sécurité.
+
+Vous pouvez consulter la documentation complète de la balise `<input>` sur [cette page](https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input).
 
 ### Envoi de fichiers avec un formulaire
 
-Les formulaires permettent également d'envoyer des fichiers. On retrouve les informations sur les fichiers envoyés dans un tableau associatif nommé `$_FILES`.
+Les formulaires permettent également d'envoyer des fichiers. Pour faire choisir un fichier, on utilite une balise `<input type="file" ... >`. Il faut également ajouter l'attribut `enctype="multipart/form-data"` à la balise `<form>`.
 
-TODO
+~~~html
+<form enctype="multipart/form-data" action="upload.php" method="post">
+    ...
+    <input type="file" name="image"/>
+    ...
+</form>
+~~~
+
+On retrouve les informations sur les fichiers envoyés dans un tableau associatif nommé `$_FILES`. Chaque fichier envoyé correspond à un élément de ce tableau, et est lui-même un tableau associatif contenant les informations sur le fichier : nom, type, taille, etc.
+
+Pour gérer le transfert du fichier vers le serveur, on utilise les fonctions PHP `is_uploaded_file`, `baseneme` et `move_uploaded_file`. Par exemple, le code suivant télécharge dans le répertoire `images/` du serveur le fichier choisi avec la balise `<input>` nommée `image`.
+
+~~~php
+$tmpFile = $_FILES['image']['tmp_name'];
+if (is_uploaded_file($tmpFile)) {
+    $image = basename($_FILES['image']['name']);
+    $uploadedFile = "images/$image";
+    move_uploaded_file($_FILES['image']['tmp_name'], $uploadedFile);
+}
+~~~
 
 ## Transmission de données et sécurité
 
-Que ce soit pour des données issues de l'URL (`$_GET`) ou d'un formulaire (`$_POST`), il garder à l'esprit que les données reçues sont saisies par l'utilisateur, ce qui peut constituer une menace pour la sécurité du site. Par défaut, rien n'empêche un utilisateur malveillant de saisir des données de manière à provoquer un comportement inattendu du site Web. C'est ce que l'on appelle **l'injection de code**, ou faille XSS. Par exemple, au lieu de saisir son nom, l'utilisateur va saisir un morceau de code JavaScript qui s'exécutera à l'insu du développeur du site.
+Qu'elles soient issues de l'URL (`$_GET`) ou d'un formulaire (`$_POST`), il faut garder à l'esprit que les données reçues par une page PHP sont saisies par l'utilisateur, ce qui peut constituer une menace pour la sécurité du site. Rien n'empêche un utilisateur malveillant de saisir des données de manière à provoquer un comportement inattendu du site Web. C'est ce que l'on appelle **l'injection de code**. 
+
+Pour se prémunir contre ces risques, il faut appliquer un principe très important : **ne jamais faire confiance aux données de l'utilisateur**. Un développeur Web qui suppose que ses utilisateurs saisiront uniquement des informations appropriées et n'effectue aucun contrôle sur ces saisies prend le risque d'exposer son site à des attaques très faciles à réaliser.
+
+Il existe deux principaux types d'injection de code :
+
+* L'injection JavaScript dans une page HTML, appelé parfois [XSS](https://fr.wikipedia.org/wiki/Cross-site_scripting) (*Cross-Site Scripting*).
+* L'injection SQL dans une base données, dont nous parlerons dans un prochain chapitre.
+
+Pour réaliser une injection de code JavaScript, un utilisateur va saisir un morceau de code JavaScript au lieu d'une valeur "normale".
 
 ```html
 <script type="text/javascript">alert('Miaou !')</script>
 ```
 
-Pour se prémunir contre ces risques, il faut appliquer un principe très important : **ne jamais faire confiance aux données de l'utilisateur**. Un développeur Web qui suppose que ses utilisateurs saisiront uniquement des informations appropriées et n'effectue aucun contrôle sur ces saisies prend le risque d'exposer son site à des attaques très faciles à réaliser.
+Si la valeur saisie est directement affichée par la page PHP, le résultat HTML généré contiendra un script JavaScript imprévu qui sera exécuté par le navigateur client. Cela peut potentiellement causer de gros problèmes de sécurité.
 
-Un premier niveau de sécurité, qui doit devenir un réflexe, consiste à toujours vérifier le contenu des tableaux `$_GET` et `$_POST` reçus avant de les insérer dans une page HTML. Il existe plusieurs fonctions PHP qui limitent fortement le risque d'injection de code. Le choix le plus fréquent est la fonction `htmlspecialchars`. Cette fonction remplace les éventuelles balises HTML présentes dans la valeur qu'elle reçoit. On peut intégrer l'appel à `htmlspecialchars` dans une fonction `escape`.
+Un premier niveau de sécurité, qui doit devenir un réflexe, consiste à "nettoyer" toute donnée externe avant de l'utiliser pour générer une page Web. Il existe plusieurs fonctions PHP qui limitent fortement le risque d'injection de code JavaScript. Le choix le plus fréquent est la fonction `htmlspecialchars`. Cette fonction remplace certains caractères spéciaux par des entités HTML. Par exemple, le caractère `<` est remplacé par `&lt;`. Cela permet de désactiver l'exécution du code contenu dans des balises `<script>`.
+
+On peut intégrer l'appel à `htmlspecialchars` dans une fonction `escape`.
 
 ```php
 <?php
@@ -236,17 +278,13 @@ function escape($valeur)
 ?>
 ```
 
-Il faut penser à toujours utiliser cette fonction lors de l'insertion de données externes dans une page Web.
+Il faut toujours penser à utiliser cette fonction lors de l'insertion de données externes dans une page Web.
 
 ```php
 $prenom = $_GET["prenom"];
 $nom = $_GET["nom"];
-echo 'Bienvenue ' . escape($prenom) . ' ' .escape($nom) . ' !';
+echo 'Bienvenue ' . escape($prenom) . ' ' . escape($nom) . ' !';
 ```
-
-## Notion de variable superglobale
-
-Les variables `$_GET` et `$_POST` sont des exemples de variables superglobales. Une variable superglobale est une variable PHP particulière créée par le langage et non par le développeur. La plupart du temps, elle commence par le symbole `$_`. Elle a comme autre particularité d'être disponible partout dans le code (d'où son nom). On peut par exemple accéder au contenu de `$_POST` depuis n'importe quel endroit d'une page PHP. Une variable superglobale est un tableau associatif qui permet d'associer des clés et des valeurs.
 
 ## Transmission via la session
 
@@ -292,6 +330,6 @@ En fin de visite, la destruction explicite d'une session se fait grâce à la fo
 
 **Rappel** : cette destruction est automatique au bout d'un certain temps d'inactivité.
 
-### Intérêt des sessions
+### Utilisation des sessions
 
 Un cas d'utilisation très fréquent des sessions est l'authentification d'un utilisateur par login/mot de passe. En utilisant une session pour mémoriser ces paramètres, on peut "reconnaître" l'utilisateur sur toutes les pages du site, mais aussi restreindre certaines zones aux utilisateurs authentifiés : si la variable de session associée au login existe, on affiche le contenu, sinon on affiche une erreur.
