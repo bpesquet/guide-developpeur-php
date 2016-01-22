@@ -4,14 +4,18 @@ L'objectif de ce chapitre est de connaître les différents moyens de faire pass
 
 ## Transmission via l'URL
 
-Une URL représente l'adresse d'une page web (commençant généralement par `http://` ou `https://`). Lorsqu'on fait un lien vers une page, il est possible d'ajouter des paramètres sous la forme `bonjour.php?nom=Dupont&prenom=Jean` qui seront transmis à la page.
+Une URL représente l'adresse d'une page web et commence par `http://` ou `https://`. Lorsqu'on fait un lien vers une autre page, il est possible d'ajouter des paramètres sous la forme `bonjour.php?nom=Dupont&prenom=Jean` qui seront transmis à la page.
 
-Dans ce cas, la page `bonjour.php` dans l'exemple précédent recevra ces paramètres dans un tableau associatif nommé `$_GET` et défini automatiquement par PHP :
+![](images/transmettre-donnees/url_get_parameters.png)
+
+On peut transmettre autant de paramètres que l'on veut dans une URL, la seule limite étant de ne pas dépasser une longueur totoale de 256 caractères.
+
+Dans ce cas, la page `bonjour.php` recevra ces paramètres dans un tableau associatif nommé `$_GET` et défini automatiquement par PHP :
 
 * `$_GET['nom']` aura pour valeur `Dupont` ;
 * `$_GET['prenom']` aura pour valeur `Jean`.
 
-Avant d'utiliser un paramètre attendu dans l'URL, on utilise la fonction `isset` qui permet de vérifier si ce paramètre est défini ou non.
+Avant d'utiliser un paramètre transmis dans l'URL, on doit utiliser la fonction `isset` qui permet de vérifier si ce paramètre est défini ou non.
 
 ```php
 if (isset($_GET['nom']) {
@@ -20,13 +24,15 @@ if (isset($_GET['nom']) {
 })
 ```
 
+Si un paramètre provenant de l'URL est destiné à être affiché dans la page HTML générée par PHP (exemple : `<?php echo $_GET['nom']; ?>`), il faut également prendre une précaution supplémentaire pour éviter certaines failles de sécurité (voir plus bas).
+
 ## Transmission via un formulaire
 
 Les formulaires sont le moyen le plus pratique pour le visiteur de transmettre des informations à un site. PHP est capable de récupérer les données saisies par vos visiteurs et de les traiter. 
 
 ### Création d'un formulaire
 
-On ajoute un formulaire à une page Web grâce à la base HTML `<form>`.
+On ajoute un formulaire à une page Web grâce à la balise HTML `<form>`.
 
 ```html
 <!doctype html>
@@ -49,12 +55,23 @@ On ajoute un formulaire à une page Web grâce à la base HTML `<form>`.
 
 La balise HTML `<form>` possède deux attributs importants :
 
-* `action` permet de définir l'URL qui traitera les informations soumises par le formulaire, lorsque l'utilisateur le validera en cliquant sur le bouton de type submit (ici "Envoyer").
-* `method` permet de définir le type de requête HTTP utilisée pour envoyer les données à l'URL d'action. Ici, ce sera une requête POST, le cas le plus fréquent avec les formulaires.
+* `action` permet de définir l'URL qui traitera les informations soumises par le formulaire, lorsque l'utilisateur le validera en cliquant sur le bouton de type `submit` (ici "Envoyer").
+* `method` permet de définir le type de requête HTTP utilisée pour envoyer les données à l'URL d'action. Ici, ce sera une requête `POST`, le cas le plus fréquent avec les formulaires.
+
+**Note** : on peut également utiliser la méthode `GET` avec un formulaire, mais dans ce cas les paramètres seront visibles dans l'URL et on court le risque de dépasser la taille maximale de 256 caractères.
+
+A l'intérieur d'un formulaire, les balises HTML `<input>` permettent de définir des champs de saisie pour l'utilisateur. L'attribut `name` d'une balise `<input>` définit le nom de la variable qui contiendra la valeur saisie.
 
 ### Récupération des données d'un formulaire
 
-Les données envoyées via un formulaire sont ajoutées dans le corps de la requête HTTP et se retrouvent dans un tableau associatif nommé `$_POST` défini automatiquement par PHP.
+Lorsque l'utilisateur soumet un formulaire, la ressource identifiée par l'attribut `action` de la balise `<form>` reçoit les données du formulaire et peut les traiter.
+
+Si le formulaire est soumis avec la méthode `POST`, les données envoyées via un formulaire sont ajoutées dans le corps de la requête HTTP et se retrouvent dans un tableau associatif nommé `$_POST` défini automatiquement par PHP.
+
+Comme toutes les variables superglobales, `$_POST` s'utilise comme un tableau associatif :
+
+* Les clés de ce tableau sont les noms des champs du formulaire (attributs `name` des balises `<input>` du formulaire).
+* Les valeurs associées aux clés sont les données saisies par l'utilisateur dans chaque champ.
 
 ```php
 // récupération des zones de saisie dans des variables
@@ -62,6 +79,126 @@ $login = $_POST["login"];
 $mdp = $_POST["password"];
 // ...
 ```
+
+A des fins de débogage, on peut afficher le contenu de `$_POST` en ajoutant une instruction `print_r($_POST)`.
+
+### Types de champs de saisie
+
+L'attribut `type` d'une balise `<input>` permet de préciser le type de donnée à saisir et est interprétée par le navigateur pour améliorer l'expérience utilisateur.
+
+* Pour faire saisir un texte court (une seule ligne), on utilise une balise `<input type="text" ...>`. On peut définir la valeur initiale du champ en ajout l'attribut `value`.
+
+~~~html
+<input type="text" name="prenom" value="Baptiste" />
+~~~
+
+* Pour faire saisir un mot de passe, on utilise une balise `<input type="password" ...>`. Dans ce cas, le navigateur masque les caractères saisis par l'utilisateur.
+
+~~~html
+<input type="password" name="mdp" />
+~~~
+
+* Pour faire saisir un texte plus long (plusieurs lignes), on utilise une balise `<textarea>`. La balise fermante `</textarea>` est obligatoire et l'éventuelle valeur initiale est ajoutée entre les balises ouvrante et fermante. L'attribut `rows` est utilisé pour préciser le nombre le lignes de la zone de saisie.
+
+~~~html
+<textarea name="message" rows="6">Entrez votre message</textarea>
+~~~
+
+* Pour faire saisir une valeur binaire (oui/non, vrai/faux, etc), on utilise une balise `<input type="checkbox" ...>`. L'attribut `checked`, s'il est présent, précise que la case est cochée par défaut.
+
+~~~html
+<input type="checkbox" name="familier" checked />
+~~~
+
+Lors de la récupération des données du formulaire, on vérifie l'état de la case (cochée ou non) à l'aide de la fonction `isset`.
+
+~~~php
+if (isset($_POST["familier"])) {
+    // La case est cochée
+else {
+    // La case est décochée
+}
+~~~
+
+* Pour faire saisir un choix parmi plusieurs, on utilise des balises `<input type="radio" ...>` ayant la même valeur pour l'attribut `name`. On crée ainsi une série de boutons radios dont seul l'un pourra être coché par l'utilisateur. 
+
+~~~html
+<input type="radio" name="politesse" value="1" checked /> Mademoiselle<br />
+<input type="radio" name="politesse" value="2" /> Madame<br />
+<input type="radio" name="politesse" value="3" /> Monsieur<br />
+~~~
+
+Lors de la récupération des données du formulaire, on examine la valeur du champ afin d'en déduire la case cochée. Cette valeur correspond à l'attribut `value` du bouton sélectionné.
+
+~~~php
+$message = "Bonjour, ";
+switch($_POST["politesse"]) 
+{
+case 1:
+    $message = $message . " Mademoiselle.";
+    break;
+case 2:
+    $message = $message . " Madame.";
+    break;
+case 3:
+    $message = $message . " Monsieur.";
+    break;
+}
+~~~
+
+* Une autre possibilité pour faire saisir un choix parmi plusieurs est de définir une liste déroulante grâce à une balise `<select>`. A l'intérieur de cette balise, on ajoute des choix possibles grâce à la balise <option>.
+
+~~~html
+<select name="catpro" size="1">
+    <option value="CP1" selected> Etudiant</option>
+    <option value="CP2"> Salarié</option>
+    <option value="CP3"> Cadre</option>
+</select>
+~~~
+
+L'attribut `size` de la balise `<select>`` définit le nombre d'éléments affichés par la liste. L'élément sélectionné par défaut est indiqué par l'attribut `selected`.
+
+Lors de la récupération des données du formulaire, on examine la valeur du champ pour trouver l'élément qui a été sélectionné. Cette valeur correspond à l'attribut `value` de l'élément choisi.
+
+~~~php
+$codecat = $_POST["catpro"]; 
+if ($codecat == "CP1") $categorie = "Etudiant";
+elseif ($codecat == "CP2") $categorie = "Salarié";
+elseif ($codecat == "CP3") $categorie = "Cadre";
+~~~
+
+#### Autres types de champs
+
+    * `<input type="email" ...>` : saisie d'une adresse de courriel.
+    * `<input type="number" ...>` : saisie d'un nombre.
+    * `<input type="date" ...>` : saisie d'une date.
+    * ... ([liste des types de champ](https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input)).
+
+#### Amélioration de l'expérience utilisateur
+
+Deux attributs des balises de saisie permettent d'aider l'utilisateur du formulaire dans sa saisie :
+
+* `autofocus` (booléen) place le curseur de saisie sur le champ au chargement du formulaire.
+* `placeholder` définit le contenu par défaut du champ.
+
+La norme HTML5 a apporté de nouveaux types de champs comme `email`, `number` ou `date`. En voici la [liste complète](https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input).
+
+~~~html
+<input type="email" name="courriel" />
+~~~
+
+Les navigateurs modernes interprètent ce type pour :
+
+* Améliorer l'expérience de saisie (exemple : un calendrier déroulant pour un champ de type `date`).
+* Valider la saisie avant envoi de la requête au serveur (exemple : vérification de la présence d'un `@` pour un champ de type `email`). 
+
+Il est également possible de rendre un champ obligatoire grâce à l'attribut booléen `required`.
+
+~~~html
+<input type="email" name="courriel" required />
+~~~
+
+Malgré tout, la validation finale des valeurs saisies dans un formulaire doit toujours se faire côté serveur (par exemple avec PHP) pour des raisons de sécurité.
 
 ### Envoi de fichiers avec un formulaire
 
