@@ -245,6 +245,23 @@ foreach($langages as $langage) {
 
 **Attention** : ne pas confondre la variable qui représente le tableau (ici `$langages`, écrite au pluriel) et la variable qui représente l'élément courant dans la boucle (ici `$langage`).
 
+Le parcours d'un tableau associatif avec une boucle `foreach` permet d'obtenir la liste des clés et des valeurs associées.
+
+```php
+<?php
+$client = array(
+    "Nom" => "Annie ZETTE",
+    "Ville" => "Lyon",
+    "Courriel" => "annie@zette.fr"
+);
+?>
+<ul>
+<?php foreach($client as $cle => $valeur) { ?>
+    <li><?php echo $cle . ' : ' . $valeur ?></li>
+<?php } ?>
+</ul>
+```
+
 ## Fonctions
 
 ### Utilisation de fonctions prédéfinies

@@ -40,8 +40,8 @@ On peut traiter immédiatement les erreurs (base de données introuvable, mauvai
 
 ~~~php
 try {
-    $bdd = new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password", 
-        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));    
+    $bdd = new PDO("mysql:host=localhost;dbname=mabase;charset=utf8", "mabase_util", 
+        "mabase_mdp", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));   
 }
 catch (Exception $e) {
     die('Erreur fatale : ' . $e->getMessage());
@@ -102,9 +102,9 @@ while ($ligne = $resultat->fetch()) {
 $requete = "select * from employe";
 $resultat = $bdd->query($requete);
 
-// Récupération de toutes les données résultats de la requête
+// Récupération de tous les résultats de la requête dans un tableau
 $donnees = $resultat->fetchAll();
-// Itération sur les résultats de la requête SQL
+// Itération sur le contenu du tableau
 foreach ($donnees as $ligne) {
     // On accède à la valeur de macolonne avec $ligne['macolonne'];
     // ...
