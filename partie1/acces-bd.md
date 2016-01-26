@@ -149,4 +149,4 @@ La technique ci-dessus rend la base vulnérable aux attaques de type "injection 
 
 Ce risque de sécurité n'existe pas lorsqu'on utilise des requêtes préparées, 
 
-**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']` reçue du formulaire comme nous l'avios fait dans le chapitre précédent. L'appel à `htmlspecialchars` désactive l'exécution de code JavaScript mais ne présente aucun intérêt dans le cas de données utilisées dans des requêtes SQL.
+**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']` reçue du formulaire comme nous l'avions fait dans le chapitre précédent. L'appel à `htmlspecialchars` désactive l'exécution de code JavaScript mais ne présente aucun intérêt dans le cas de données utilisées dans des requêtes SQL.
