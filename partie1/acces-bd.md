@@ -43,8 +43,7 @@ try {
     $bdd = new PDO("mysql:host=$server;dbname=$db;charset=utf8", "$username", "$password", 
         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));    
 }
-catch (Exception $e)
-{
+catch (Exception $e) {
     die('Erreur fatale : ' . $e->getMessage());
 }
 // ...
@@ -68,7 +67,7 @@ $requete = "select * from employe";
 $resultat = $bdd->query($requete);
 ```
 
-Le symbole `->` est l'équivalent PHP du symbole `.` utilisé dans d'autres langages comme Java ou C#. L'instruction `$bdd->query` se lit : "J'appelle la méthode query sur mon objet $bdd".
+Le symbole `->` est l'équivalent PHP du symbole `.` utilisé dans d'autres langages comme Java ou C#. L'instruction `$bdd->query` se lit : "J'appelle la méthode `query` sur mon objet `$bdd`".
 
 Après l'appel à `query`, on peut parcourir le résultat ligne par ligne en appelant à la méthode `fetch` sur le résultat de la requête.
 
@@ -150,4 +149,4 @@ La technique ci-dessus rend la base vulnérable aux attaques de type "injection 
 
 Ce risque de sécurité n'existe pas lorsqu'on utilise des requêtes préparées, 
 
-**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']` reçue du formulaire. L'appel à `htmlspecialchars` désactive l'exécution de code JavaScript mais ne présente aucun intérêt dans le cas de données utilisées dans des requêtes SQL.
+**Note** : ici, pas besoin de "nettoyer" la variable `$_POST['service']` reçue du formulaire comme nous l'avios fait dans le chapitre précédent. L'appel à `htmlspecialchars` désactive l'exécution de code JavaScript mais ne présente aucun intérêt dans le cas de données utilisées dans des requêtes SQL.

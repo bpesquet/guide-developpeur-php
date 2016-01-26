@@ -99,16 +99,18 @@ else {
     // Le formulaire n'a pas été soumis
     // ...
 }
+// Code commun aux deux situations
+// ...
 ```
 
 ### Types de champs de saisie
 
 L'attribut `type` d'une balise `<input>` permet de préciser le type de donnée à saisir.
 
-* Pour faire saisir un texte court (une seule ligne), on utilise une balise `<input type="text" ...>`. On peut définir la valeur initiale du champ en ajout l'attribut `value`.
+* Pour faire saisir un texte court (une seule ligne), on utilise une balise `<input type="text" ...>`. On peut définir la valeur initiale du champ en ajout l'attribut `value`. L'attribut `size` permet de préciser la taille (nombre de caractères) du champ de saisie.
 
 ~~~html
-<input type="text" name="prenom" value="Baptiste" />
+<input type="text" name="prenom" value="Baptiste" size="20" />
 ~~~
 
 * Pour faire saisir un mot de passe, on utilise une balise `<input type="password" ...>`. Dans ce cas, le navigateur masque les caractères saisis par l'utilisateur.
@@ -330,6 +332,6 @@ En fin de visite, la destruction explicite d'une session se fait grâce à la fo
 
 **Rappel** : cette destruction est automatique au bout d'un certain temps d'inactivité.
 
-### Utilisation des sessions
+### Utilité des sessions
 
 Un cas d'utilisation très fréquent des sessions est l'authentification d'un utilisateur par login/mot de passe. En utilisant une session pour mémoriser ces paramètres, on peut "reconnaître" l'utilisateur sur toutes les pages du site, mais aussi restreindre certaines zones aux utilisateurs authentifiés : si la variable de session associée au login existe, on affiche le contenu, sinon on affiche une erreur.
