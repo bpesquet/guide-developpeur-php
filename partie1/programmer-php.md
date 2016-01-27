@@ -311,10 +311,22 @@ $resultat = multiplier($nb1, $nb2);
 ?>
 ```
 
-TODO Ajouter portée variables "globales" dans fonctions
+**Attention** : en PHP, une variable définie à l'extérieur d'une fonction n'est pas accessible dans le corps de cette fonction. Il s'agit d'une différence importante avec d'la plupart des autres langages de programmation.
+
+~~~php
+<?php
+$a = 1;
+
+function test() { 
+    echo '$a vaut ' . $a; // $a n'existe pas dans ce contexte
+}
+
+test(); // Affiche uniquement "$a vaut "
+?>
+~~~
 
 Le plus souvent, on externalise la définition des fonctions dans un fichier dédié qui est inclus dans la page utilisant la fonction.
 
 ```php
-<?php include('fonctions.php'); ?>
+<?php include 'fonctions.php'; ?>
 ```
