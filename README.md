@@ -12,7 +12,7 @@ Il se divise en deux parties. La première permet de découvrir PHP et aborde le
 - Accès à une base de données relationnelle
 
 La seconde partie est consacrée à des notions plus avancées :
-- (TODO) Programmation orientée objet en PHP
+- Programmation orientée objet en PHP
 - (TODO) Architecture Modèle-Vue-Contrôleur
 - (TODO) Utilisation d'un framework (Silex)
 

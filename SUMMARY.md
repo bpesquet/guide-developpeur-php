@@ -9,3 +9,5 @@
     * [Accéder à une base de données](partie1/acces-bd.md)
 
 * [Partie 2 : maîtriser PHP](partie2/README.md)
+
+    * [La programmation orientée objet en PHP](partie2/poo-php.md)
