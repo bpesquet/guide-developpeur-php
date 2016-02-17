@@ -101,7 +101,7 @@ Toute expression renvoyant une valeur booléenne peut être utilisée comme cond
 
 ### Les opérateurs logiques
 
-On peut définir des conditions plus complexes ("La valeur de X est entre 100 et 200") grâce aux opérateurs logiques. Ceux du langage PHP sont les suivants : `&&` (Et), `||` (Ou), `!` (Non).
+On peut définir des conditions plus complexes ("La valeur de X est entre 100 et 200") grâce aux opérateurs logiques. Ceux du langage PHP sont les suivants : `&&` (Et), `||` (Ou), `!` (Non) il existe aussi `and` et `or`. Si `and` est utilisé avec `&&`, `&&` sera prioritaire. De même que `||` sera prioritaire sur `or`. 
 
 ### L'instruction `switch`
 
