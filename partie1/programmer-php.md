@@ -45,7 +45,7 @@ La différence entre guillemets simples et doubles apparaît lorsqu'on inclut un
 
 Le premier `echo` affiche : `Vous avez 39 ans`. Le second `echo` affiche : `Vous avez $age ans`.
 
-Lorsqu'on utilise des guillemets doubles pour définir une chaîne de caractères, les variables sont inerprétées (remplacées par leur valeur). Ce n'est pas le cas avec des guillemets simples.
+Lorsqu'on utilise des guillemets doubles pour définir une chaîne de caractères, les variables sont interprétées (remplacées par leur valeur). Ce n'est pas le cas avec des guillemets simples.
 
 ## Tests et conditions
 
@@ -81,6 +81,20 @@ else {
 }
 ?>
 ```
+Une autre syntaxe possible de l'instruction if est la suivante :
+
+```php
+<?php
+if($a > $b):
+    // sera exécuté si $a > $b
+elseif($a == $b): 
+   // sera exécuté si $a == $b
+else:
+   // sera exécuté si $a est plus petit que $b
+endif;
+?>
+```
+Cette syntaxe, que l'on retrouve dans le code source de certains CMS, peut être pratique pour repérer plus facilement la fin des conditions (`endif;` au lieu de `}` ) lorsque le code PHP englobe de grandes portions de code HTML.
 
 ### La notion de condition
 
@@ -101,7 +115,8 @@ Toute expression renvoyant une valeur booléenne peut être utilisée comme cond
 
 ### Les opérateurs logiques
 
-On peut définir des conditions plus complexes ("La valeur de X est entre 100 et 200") grâce aux opérateurs logiques. Ceux du langage PHP sont les suivants : `&&` (Et), `||` (Ou), `!` (Non) il existe aussi `and` et `or`. Si `and` est utilisé avec `&&`, `&&` sera prioritaire. De même que `||` sera prioritaire sur `or`. 
+On peut définir des conditions plus complexes ("La valeur de X est entre 100 et 200") grâce aux opérateurs logiques. Ceux du langage PHP sont les suivants : `&&` (Et), `||` (Ou), `!` (Non) il existe aussi `and` et `or`. Si `and` est utilisé avec `&&`, `&&` sera prioritaire. De même que `||` sera prioritaire sur `or`.
+Il existe aussi l'opérateur `xor` correspondant au Ou exclusif, c'est-à-dire qu'il vérifie qu'une des deux conditions qu'il sépare est vraie, mais pas les deux à la fois.
 
 ### L'instruction `switch`
 
@@ -311,7 +326,7 @@ $resultat = multiplier($nb1, $nb2);
 ?>
 ```
 
-**Attention** : en PHP, une variable définie à l'extérieur d'une fonction n'est pas accessible dans le corps de cette fonction. Il s'agit d'une différence importante avec d'la plupart des autres langages de programmation.
+**Attention** : en PHP, une variable définie à l'extérieur d'une fonction n'est pas accessible dans le corps de cette fonction. Il s'agit d'une différence importante avec la plupart des autres langages de programmation.
 
 ~~~php
 <?php
