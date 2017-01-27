@@ -216,7 +216,7 @@ Vous pouvez consulter la documentation complète de la balise `<input>` sur [cet
 
 ### Envoi de fichiers avec un formulaire
 
-Les formulaires permettent également d'envoyer des fichiers. Pour faire choisir un fichier, on utilite une balise `<input type="file" ... >`. Il faut également ajouter l'attribut `enctype="multipart/form-data"` à la balise `<form>`.
+Les formulaires permettent également d'envoyer des fichiers. Pour faire choisir un fichier, on utilise une balise `<input type="file" ... >`. Il faut également ajouter l'attribut `enctype="multipart/form-data"` à la balise `<form>`.
 
 ~~~html
 <form enctype="multipart/form-data" action="upload.php" method="post">
@@ -228,7 +228,7 @@ Les formulaires permettent également d'envoyer des fichiers. Pour faire choisir
 
 On retrouve les informations sur les fichiers envoyés dans un tableau associatif nommé `$_FILES`. Chaque fichier envoyé correspond à un élément de ce tableau, et est lui-même un tableau associatif contenant les informations sur le fichier : nom, type, taille, etc.
 
-Pour gérer le transfert du fichier vers le serveur, on utilise les fonctions PHP `is_uploaded_file`, `baseneme` et `move_uploaded_file`. Par exemple, le code suivant télécharge dans le répertoire `images/` du serveur le fichier choisi avec la balise `<input>` nommée `image`.
+Pour gérer le transfert du fichier vers le serveur, on utilise les fonctions PHP `is_uploaded_file`, `basename` et `move_uploaded_file`. Par exemple, le code suivant télécharge dans le répertoire `images/` du serveur le fichier choisi avec la balise `<input>` nommée `image`.
 
 ~~~php
 $tmpFile = $_FILES['image']['tmp_name'];
@@ -290,7 +290,7 @@ echo 'Bienvenue ' . escape($prenom) . ' ' . escape($nom) . ' !';
 
 ## Transmission via la session
 
-La variable superglobale `$_SESSION` permet de stocker des informations qui seront automatiquement transmises de page en page pendant toute la durée de visite d'un internaute sur une site.
+La variable superglobale `$_SESSION` permet de stocker des informations qui seront automatiquement transmises de page en page pendant toute la durée de visite d'un internaute sur un site.
 
 ### Création d'une session
 

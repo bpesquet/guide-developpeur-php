@@ -30,7 +30,7 @@ Le constructeur utilisé ici comporte quatre paramètres :
 * Le troisième paramètre (`mabase_mdp`) est le mot de passe associé au login.
 * Le quatrième paramètre (`array(PDO::...)`) est relatif à la gestion des erreurs.
 
-**Note** : il est déconseillé d'utiliser le login `root` ayant tous les droits pour se connecter à une base de données depuis du code PHP. Il vaut mieux créer dans MySQL un utilisateur dédié n'ayant des droits que sur cett base.
+**Note** : il est déconseillé d'utiliser le login `root` ayant tous les droits pour se connecter à une base de données depuis du code PHP. Il vaut mieux créer dans MySQL un utilisateur dédié n'ayant des droits que sur cette base.
 
 On peut traiter immédiatement les erreurs (base de données introuvable, mauvais login ou mot de passe, etc) en intégrant la connexion dans un bloc `try/catch`. Il s'agit d'un mécanisme de gestion des erreurs utilisant les **exceptions**. Sans rentrer dans des détails inutiles, son fonctionnement est le suivant :
 
