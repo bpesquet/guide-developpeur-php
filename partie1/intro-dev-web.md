@@ -115,7 +115,7 @@ On a l'habitude d'accéder à un site Web en utilisant son adresse. Celle-ci est
 
 La majorité des serveurs Web est configurée pour renvoyer une page par défaut (`index.html`, `index.php`, `Default.aspx`) lorsque le client ne précise pas explicitement quelle page il souhaite récupérer (exemples : http://www.monsite.fr ou http://www.monsite.fr/mondossier/).
 
-Une adresse Web telle que celle ci-dessus esr ce qu'on appelle une **URL** ou *Uniform Resource Locator*. Elle permet de décrire l'emplacement d'une ressource Web et le moyen d'y accéder.
+Une adresse Web telle que celle ci-dessus est ce qu'on appelle une **URL** ou *Uniform Resource Locator*. Elle permet de décrire l'emplacement d'une ressource Web et le moyen d'y accéder.
 
 ## La place du langage PHP
 
@@ -128,7 +128,7 @@ La consultation d'un site Web statique met en jeu deux logiciels :
 * Le logiciel client, le plus souvent un navigateur Web.
 * Le logiciel serveur Web.
 
-Lorsqu'un client envoie une requête au serveur Web hébergeant un site statique, le serveur se contente de la renvoyer la ressource demandée. Les pages HTML affichées ne peuvent pas évoluer automatiquement, d'où le terme "statique".
+Lorsqu'un client envoie une requête au serveur Web hébergeant un site statique, le serveur se contente de renvoyer la ressource demandée. Les pages HTML affichées ne peuvent pas évoluer automatiquement, d'où le terme "statique".
 
 ![](images/intro-dev-web/web_site_statique.png)
 
@@ -150,7 +150,7 @@ Contrairement à un site statique, un site dynamique ouvre la voie à des intera
 
 ### Les langages serveur du Web dynamique
 
-Pour créer un site Web dynamique. il faut obligatoireement utiliser un langage capable de *générer* des pages HTML. Le diagramme ci-dessous rassemble les principaux langages capables de réaliser cette tâche.
+Pour créer un site Web dynamique. il faut obligatoirement utiliser un langage capable de *générer* des pages HTML. Le diagramme ci-dessous rassemble les principaux langages capables de réaliser cette tâche.
 
 ![](images/intro-dev-web/web_server_languages_chart.jpg)
 
